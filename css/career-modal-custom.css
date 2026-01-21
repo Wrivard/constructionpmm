@@ -3,6 +3,10 @@
 /* Modal Header */
 .heading-style-h2-3 {
   color: #ffffff !important;
+  margin-bottom: 12px !important;
+}
+
+.text-align-center-2 {
   margin-bottom: 8px !important;
 }
 
@@ -40,7 +44,7 @@
 .form_field-label {
   font-weight: 600 !important;
   color: #e0e0e0 !important;
-  margin-bottom: 8px !important;
+  margin-bottom: 10px !important;
   font-size: 14px !important;
   display: block !important;
 }
@@ -56,10 +60,11 @@
   display: flex !important;
   align-items: center !important;
   cursor: pointer !important;
-  padding: 12px !important;
+  padding: 14px !important;
   background: #2a2a2a !important;
   border-radius: 6px !important;
   transition: background 0.2s ease !important;
+  margin-bottom: 24px !important;
 }
 
 .form_checkbox:hover {
@@ -99,6 +104,11 @@
   line-height: 1.5 !important;
 }
 
+/* Checkbox wrapper spacing */
+.margin-bottom.margin-xsmall {
+  margin-bottom: 24px !important;
+}
+
 /* Submit Button - Inside Modal Only */
 .contact-modal1_form .button-block-01[type="submit"] {
   background: #dc3545 !important;
@@ -127,11 +137,16 @@
 .contact-modal1_content-wrapper {
   background: #1b1b1b !important;
   border-radius: 16px !important;
-  padding: 40px !important;
+  padding: 44px !important;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8) !important;
   max-width: 600px !important;
   margin: 0 auto !important;
   border: 1px solid #333333 !important;
+}
+
+/* Modal form wrapper */
+.contact-modal1_form-block {
+  margin-top: 4px !important;
 }
 
 .contact-modal1_background-overlay {
@@ -172,7 +187,11 @@
 
 /* Form Field Wrapper */
 .form_field-wrapper {
-  margin-bottom: 20px !important;
+  margin-bottom: 24px !important;
+}
+
+.form_field-wrapper:last-of-type {
+  margin-bottom: 28px !important;
 }
 
 /* Success Message - Dark Theme */
@@ -210,6 +229,7 @@
   border-radius: 8px !important;
   padding: 24px !important;
   transition: all 0.3s ease !important;
+  margin-bottom: 28px !important;
 }
 
 .form_field-wrapper[style*="dashed"]:hover {
@@ -220,19 +240,31 @@
 /* CV Upload Text */
 .form_field-wrapper[style*="dashed"] p {
   color: #999999 !important;
+  margin-bottom: 16px !important;
+  line-height: 1.5 !important;
 }
 
 .form_field-wrapper[style*="dashed"] label {
   color: #e0e0e0 !important;
+  margin-bottom: 12px !important;
+  display: block !important;
 }
 
 /* Spacing */
 .spacer-medium {
-  height: 24px !important;
+  height: 28px !important;
 }
 
 .spacer-large {
-  height: 32px !important;
+  height: 36px !important;
+}
+
+.spacer-xsmall {
+  height: 8px !important;
+}
+
+.spacer-small {
+  height: 16px !important;
 }
 
 /* Modal Title Subtitle - Dark Theme */
@@ -240,12 +272,18 @@
   color: #999999 !important;
   font-size: 14px !important;
   margin-top: 8px !important;
+  line-height: 1.6 !important;
+}
+
+/* Modal title container */
+.max-width-large.align-center {
+  margin-bottom: 4px !important;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
   .contact-modal1_content-wrapper {
-    padding: 24px !important;
+    padding: 28px 20px !important;
     border-radius: 12px !important;
   }
   
@@ -253,8 +291,16 @@
     padding: 12px 14px !important;
   }
   
-  .button-block-01 {
+  .contact-modal1_form .button-block-01[type="submit"] {
     padding: 14px 24px !important;
+  }
+  
+  .form_field-wrapper {
+    margin-bottom: 20px !important;
+  }
+  
+  .form_field-wrapper[style*="dashed"] {
+    padding: 20px !important;
   }
 }
 
@@ -274,12 +320,13 @@
   background: #dc3545 !important;
   color: white !important;
   border: none !important;
-  padding: 10px 20px !important;
+  padding: 12px 24px !important;
   border-radius: 5px !important;
   cursor: pointer !important;
   font-size: 14px !important;
   transition: all 0.3s ease !important;
   font-weight: 500 !important;
+  margin-bottom: 12px !important;
 }
 
 .form_field-wrapper button[onclick*="addCV"]:hover {
@@ -308,10 +355,21 @@
 #selected-cv-1, #selected-cv-2, #selected-cv-3 {
   background: #2a4a2a !important;
   border: 1px solid #28a745 !important;
+  margin-top: 12px !important;
+  padding: 14px !important;
+  border-radius: 6px !important;
 }
 
 #selected-cv-1 span, #selected-cv-2 span, #selected-cv-3 span {
   color: #4ade80 !important;
+}
+
+/* CV Display inner content */
+#cv-display-1, #cv-display-2, #cv-display-3 {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
 }
 
 /* Smooth transitions */
