@@ -158,10 +158,7 @@ export default async function handler(req, res) {
                 <!-- Header avec logo -->
                 <tr>
                   <td style="background: linear-gradient(135deg, #1b1b1b 0%, #2a2a2a 100%); padding: 40px 30px; text-align: center; border-bottom: 3px solid #dc3545;">
-                    <div style="margin: 0 0 20px 0;">
-                      <h1 style="margin: 0; font-size: 56px; font-weight: 900; color: #dc3545; letter-spacing: 2px; font-family: Arial, sans-serif; line-height: 1;">PMM</h1>
-                      <div style="width: 120px; height: 3px; background-color: #dc3545; margin: 8px auto 0;"></div>
-                    </div>
+                    <img src="https://constructionpmm.com/images/logo-1.webp" alt="Construction PMM Logo" width="200" height="auto" style="max-width: 200px; height: auto; margin: 0 auto 20px; display: block;" />
                     <h1 style="margin: 0; font-size: 32px; font-weight: 700; color: #ffffff; letter-spacing: -0.5px;">
                       📋 Nouvelle Candidature
                     </h1>
@@ -329,10 +326,7 @@ export default async function handler(req, res) {
                 <!-- Header Success -->
                 <tr>
                   <td style="background: linear-gradient(135deg, #dc3545 0%, #c82333 100%); padding: 50px 30px; text-align: center;">
-                    <div style="margin: 0 0 24px 0;">
-                      <h1 style="margin: 0; font-size: 56px; font-weight: 900; color: #ffffff; letter-spacing: 2px; font-family: Arial, sans-serif; line-height: 1;">PMM</h1>
-                      <div style="width: 120px; height: 3px; background-color: #ffffff; margin: 8px auto 0;"></div>
-                    </div>
+                    <img src="https://constructionpmm.com/images/logo-1.webp" alt="Construction PMM Logo" width="200" height="auto" style="max-width: 200px; height: auto; margin: 0 auto 24px; display: block;" />
                     <div style="font-size: 64px; margin-bottom: 16px;">✓</div>
                     <h1 style="margin: 0; font-size: 32px; font-weight: 700; color: #ffffff; letter-spacing: -0.5px;">
                       Candidature envoyée !
