@@ -56,7 +56,8 @@
 }
 
 /* Checkbox Styling - Dark Theme */
-.form_checkbox {
+.form_checkbox,
+.form_checkbox.w-checkbox {
   display: flex !important;
   align-items: flex-start !important;
   cursor: pointer !important;
@@ -69,6 +70,7 @@
   max-width: 100% !important;
   box-sizing: border-box !important;
   overflow: hidden !important;
+  position: relative !important;
 }
 
 .form_checkbox:hover {
@@ -105,7 +107,8 @@
   height: 100% !important;
 }
 
-.form_checkbox-label {
+.form_checkbox-label,
+.form_checkbox-label.w-form-label {
   color: #cccccc !important;
   font-size: 14px !important;
   line-height: 1.5 !important;
@@ -116,14 +119,48 @@
   max-width: calc(100% - 32px) !important;
   min-width: 0 !important;
   overflow: hidden !important;
+  white-space: normal !important;
+  display: block !important;
 }
 
 /* Force label span to respect width */
-.form_checkbox-label span {
+.form_checkbox-label span,
+.form_checkbox-label a,
+.form_checkbox-label * {
   display: inline !important;
   max-width: 100% !important;
   word-wrap: break-word !important;
   overflow-wrap: break-word !important;
+  word-break: break-word !important;
+  white-space: normal !important;
+}
+
+/* Ensure no absolute positioning breaks layout */
+.form_checkbox-label *[style] {
+  position: static !important;
+  width: auto !important;
+  max-width: 100% !important;
+}
+
+/* Nuclear option - force ALL text content to wrap */
+.w-checkbox .w-form-label,
+.w-checkbox-input ~ span,
+label[for*="Checkbox"] span {
+  display: inline-block !important;
+  max-width: 100% !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
+  white-space: normal !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+/* Force container width constraints on Webflow elements */
+.w-form .w-checkbox {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
 }
 
 /* Checkbox wrapper spacing */
@@ -189,9 +226,16 @@
 }
 
 /* All form children should respect width */
-.contact-modal1_form > * {
+.contact-modal1_form > *,
+.contact-modal1_form * {
   max-width: 100% !important;
   box-sizing: border-box !important;
+}
+
+/* Override any Webflow styles that might cause overflow */
+.contact-modal1_form .w-checkbox,
+.contact-modal1_form .form_checkbox {
+  contain: layout !important;
 }
 
 .contact-modal1_background-overlay {
