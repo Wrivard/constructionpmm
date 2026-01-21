@@ -272,26 +272,56 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('✅ Form submission successful!');
         
         // Success animation
-        if (submitButton) {
-          const spinner = submitButton.querySelector('.submit-spinner');
-          if (spinner) spinner.remove();
-          
-          submitButton.value = '✓ Envoyé !';
-          submitButton.style.background = '#28a745';
-          submitButton.style.animation = 'successPulse 0.6s ease';
-          
-          setTimeout(() => {
-            formElement.style.display = 'none';
-            if (successMessage) {
-              successMessage.style.display = 'block';
-              const successText = successMessage.querySelector('.success-text');
-              if (successText) successText.textContent = 'Merci ! Votre candidature a été reçue avec succès.';
+        try {
+          if (submitButton) {
+            console.log('🎨 Starting success animation...');
+            const spinner = submitButton.querySelector('.submit-spinner');
+            if (spinner) {
+              spinner.remove();
+              console.log('  - Spinner removed');
             }
-            formElement.reset();
-            delete window.careerCVFiles[formNumber];
-            delete window.selectedJobs[formNumber];
-            updateCVDisplay(formNumber);
-          }, 1200);
+            
+            submitButton.value = '✓ Envoyé !';
+            submitButton.style.background = '#28a745';
+            submitButton.style.animation = 'successPulse 0.6s ease';
+            console.log('  - Button styled for success');
+            
+            setTimeout(() => {
+              try {
+                console.log('🎬 Starting success timeout actions...');
+                console.log('  - formElement:', formElement ? 'exists' : 'null');
+                console.log('  - successMessage:', successMessage ? 'exists' : 'null');
+                
+                formElement.style.display = 'none';
+                console.log('  - Form hidden');
+                
+                if (successMessage) {
+                  successMessage.style.display = 'block';
+                  const successText = successMessage.querySelector('.success-text');
+                  if (successText) {
+                    successText.textContent = 'Merci ! Votre candidature a été reçue avec succès.';
+                    console.log('  - Success message displayed');
+                  }
+                } else {
+                  console.warn('⚠️ Success message element not found!');
+                }
+                
+                formElement.reset();
+                delete window.careerCVFiles[formNumber];
+                delete window.selectedJobs[formNumber];
+                updateCVDisplay(formNumber);
+                console.log('  - Form reset and cleaned up');
+                console.log('✅ Success animation complete!');
+              } catch (timeoutError) {
+                console.error('❌ Error in success timeout:', timeoutError);
+                console.error('Stack:', timeoutError.stack);
+              }
+            }, 1200);
+          }
+        } catch (animationError) {
+          console.error('❌ Error in success animation:', animationError);
+          console.error('Stack:', animationError.stack);
+          // Don't throw - animation errors shouldn't show error message to user
         }
       } catch (error) {
         // Remove spinner on error
