@@ -81,7 +81,7 @@ export default async function handler(req, res) {
     const fromEmail = process.env.FROM_EMAIL || 'onboarding@resend.dev';
     
     // ⚠️ HARDCODE recipient to prevent environment variable overrides
-    const businessEmail = 'info@constpmm.com'; // Change this to your actual email
+    const businessEmail = 'wrivard@kua.quebec'; // Testing email
 
     // Prepare attachments
     const attachments = [];
