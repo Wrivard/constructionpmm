@@ -2,6 +2,46 @@
 window.careerCVFiles = {};
 window.selectedJobs = {};
 
+// Function to hide all success/error messages
+function hideAllMessages() {
+  console.log('🔒 Hiding all success/error messages...');
+  
+  // Hide all success messages
+  const successMessages = document.querySelectorAll('.w-form-done');
+  successMessages.forEach(msg => {
+    msg.style.setProperty('display', 'none', 'important');
+    msg.style.visibility = 'hidden';
+  });
+  
+  // Hide all error messages
+  const errorMessages = document.querySelectorAll('.w-form-fail');
+  errorMessages.forEach(msg => {
+    msg.style.setProperty('display', 'none', 'important');
+    msg.style.visibility = 'hidden';
+  });
+  
+  console.log(`✅ Hidden ${successMessages.length} success messages and ${errorMessages.length} error messages`);
+}
+
+// Hide all success/error messages on page load
+document.addEventListener('DOMContentLoaded', function() {
+  hideAllMessages();
+  
+  // Also hide messages whenever a modal is opened (when any "Postuler" button is clicked)
+  const modalTriggers = document.querySelectorAll('[data-w-id*="38e6b010-294a-4c96-bdff"], [data-w-id*="5134edfc-e422-c80e-4683"], [data-w-id*="38225a3c-b7e9-9e52-04b2"]');
+  
+  modalTriggers.forEach(trigger => {
+    trigger.addEventListener('click', function() {
+      console.log('🚪 Modal opening - hiding messages...');
+      // Hide messages immediately when modal opens
+      setTimeout(hideAllMessages, 0);
+      setTimeout(hideAllMessages, 100); // Double-check after animation
+    });
+  });
+  
+  console.log(`📝 Added event listeners to ${modalTriggers.length} modal triggers`);
+});
+
 function addCV(formNumber) {
   if (window.careerCVFiles[formNumber]) {
     showCustomAlert('Vous avez déjà sélectionné un CV. Veuillez le retirer avant d\'en ajouter un autre.', 'warning');
