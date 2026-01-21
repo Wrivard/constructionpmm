@@ -1,29 +1,31 @@
-/* Career Modal Custom Styling - PMM Branding */
+/* Career Modal Custom Styling - PMM Branding - Dark Theme */
 
 /* Modal Header */
 .heading-style-h2-3 {
-  color: #2c3e50 !important;
+  color: #ffffff !important;
   margin-bottom: 8px !important;
 }
 
-/* Input Fields Styling */
+/* Input Fields Styling - Dark Theme */
 .form_input-2 {
-  border: 2px solid #e0e0e0 !important;
+  border: 2px solid #333333 !important;
   border-radius: 6px !important;
   padding: 14px 16px !important;
   font-size: 15px !important;
   transition: all 0.3s ease !important;
-  background: #ffffff !important;
+  background: #2a2a2a !important;
+  color: #ffffff !important;
 }
 
 .form_input-2:focus {
   border-color: #dc3545 !important;
   outline: none !important;
-  box-shadow: 0 0 0 4px rgba(220, 53, 69, 0.1) !important;
+  box-shadow: 0 0 0 4px rgba(220, 53, 69, 0.2) !important;
+  background: #333333 !important;
 }
 
 .form_input-2::placeholder {
-  color: #adb5bd !important;
+  color: #888888 !important;
   font-size: 14px !important;
 }
 
@@ -34,10 +36,10 @@
   font-family: inherit !important;
 }
 
-/* Labels */
+/* Labels - Dark Theme */
 .form_field-label {
   font-weight: 600 !important;
-  color: #2c3e50 !important;
+  color: #e0e0e0 !important;
   margin-bottom: 8px !important;
   font-size: 14px !important;
   display: block !important;
@@ -49,19 +51,19 @@
   margin-left: 4px;
 }
 
-/* Checkbox Styling */
+/* Checkbox Styling - Dark Theme */
 .form_checkbox {
   display: flex !important;
   align-items: center !important;
   cursor: pointer !important;
   padding: 12px !important;
-  background: #f8f9fa !important;
+  background: #2a2a2a !important;
   border-radius: 6px !important;
   transition: background 0.2s ease !important;
 }
 
 .form_checkbox:hover {
-  background: #e9ecef !important;
+  background: #333333 !important;
 }
 
 .form_checkbox-icon-2 {
@@ -71,7 +73,7 @@
   height: 20px !important;
   margin-right: 10px !important;
   flex-shrink: 0 !important;
-  background: white !important;
+  background: #1b1b1b !important;
   transition: all 0.2s ease !important;
 }
 
@@ -92,13 +94,13 @@
 }
 
 .form_checkbox-label {
-  color: #495057 !important;
+  color: #cccccc !important;
   font-size: 14px !important;
   line-height: 1.5 !important;
 }
 
-/* Submit Button */
-.button-block-01 {
+/* Submit Button - Inside Modal Only */
+.contact-modal1_form .button-block-01[type="submit"] {
   background: #dc3545 !important;
   border: none !important;
   padding: 16px 32px !important;
@@ -107,38 +109,39 @@
   font-size: 16px !important;
   cursor: pointer !important;
   transition: all 0.3s ease !important;
-  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.2) !important;
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3) !important;
   width: 100% !important;
 }
 
-.button-block-01:hover {
+.contact-modal1_form .button-block-01[type="submit"]:hover {
   background: #c82333 !important;
   transform: translateY(-2px) !important;
-  box-shadow: 0 6px 16px rgba(220, 53, 69, 0.3) !important;
+  box-shadow: 0 6px 16px rgba(220, 53, 69, 0.4) !important;
 }
 
-.button-block-01:active {
+.contact-modal1_form .button-block-01[type="submit"]:active {
   transform: translateY(0) !important;
 }
 
-/* Modal Background */
+/* Modal Background - Dark Theme #1b1b1b */
 .contact-modal1_content-wrapper {
-  background: #ffffff !important;
+  background: #1b1b1b !important;
   border-radius: 16px !important;
   padding: 40px !important;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3) !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8) !important;
   max-width: 600px !important;
   margin: 0 auto !important;
+  border: 1px solid #333333 !important;
 }
 
 .contact-modal1_background-overlay {
   backdrop-filter: blur(8px) !important;
-  background: rgba(0, 0, 0, 0.6) !important;
+  background: rgba(0, 0, 0, 0.85) !important;
 }
 
-/* Close Button */
+/* Close Button - Dark Theme */
 .contact-modal1_close-button {
-  background: #f8f9fa !important;
+  background: #2a2a2a !important;
   border-radius: 50% !important;
   width: 40px !important;
   height: 40px !important;
@@ -149,15 +152,18 @@
   position: absolute !important;
   right: 20px !important;
   top: 20px !important;
+  border: 1px solid #444444 !important;
 }
 
 .contact-modal1_close-button:hover {
   background: #dc3545 !important;
   transform: rotate(90deg) !important;
+  border-color: #dc3545 !important;
 }
 
 .contact-modal1_close-button svg {
   transition: color 0.2s ease !important;
+  color: #ffffff !important;
 }
 
 .contact-modal1_close-button:hover svg {
@@ -169,37 +175,37 @@
   margin-bottom: 20px !important;
 }
 
-/* Success Message */
+/* Success Message - Dark Theme */
 .form_message-success-wrapper {
-  background: #d4edda !important;
-  border: 2px solid #c3e6cb !important;
+  background: #1e4620 !important;
+  border: 2px solid #28a745 !important;
   border-radius: 8px !important;
   padding: 20px !important;
 }
 
 .success-text {
-  color: #155724 !important;
+  color: #4ade80 !important;
   font-weight: 600 !important;
   font-size: 16px !important;
 }
 
-/* Error Message */
+/* Error Message - Dark Theme */
 .form_message-error-wrapper {
-  background: #f8d7da !important;
-  border: 2px solid #f5c6cb !important;
+  background: #4a1c1c !important;
+  border: 2px solid #dc3545 !important;
   border-radius: 8px !important;
   padding: 20px !important;
 }
 
 .error-text {
-  color: #721c24 !important;
+  color: #ff6b6b !important;
   font-weight: 600 !important;
   font-size: 16px !important;
 }
 
-/* CV Upload Section */
+/* CV Upload Section - Dark Theme */
 .form_field-wrapper[style*="dashed"] {
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%) !important;
+  background: linear-gradient(135deg, #2a2a2a 0%, #333333 100%) !important;
   border: 2px dashed #dc3545 !important;
   border-radius: 8px !important;
   padding: 24px !important;
@@ -207,8 +213,17 @@
 }
 
 .form_field-wrapper[style*="dashed"]:hover {
-  border-color: #c82333 !important;
-  background: linear-gradient(135deg, #fff5f5 0%, #ffe6e6 100%) !important;
+  border-color: #ff4d4d !important;
+  background: linear-gradient(135deg, #331a1a 0%, #441d1d 100%) !important;
+}
+
+/* CV Upload Text */
+.form_field-wrapper[style*="dashed"] p {
+  color: #999999 !important;
+}
+
+.form_field-wrapper[style*="dashed"] label {
+  color: #e0e0e0 !important;
 }
 
 /* Spacing */
@@ -220,9 +235,9 @@
   height: 32px !important;
 }
 
-/* Modal Title Subtitle */
+/* Modal Title Subtitle - Dark Theme */
 .text-align-center-2 p {
-  color: #6c757d !important;
+  color: #999999 !important;
   font-size: 14px !important;
   margin-top: 8px !important;
 }
@@ -243,14 +258,60 @@
   }
 }
 
-/* Input validation states */
+/* Input validation states - Dark Theme */
 .form_input-2:invalid:not(:placeholder-shown) {
   border-color: #dc3545 !important;
-  background: #fff5f5 !important;
+  background: #331a1a !important;
 }
 
 .form_input-2:valid:not(:placeholder-shown) {
   border-color: #28a745 !important;
+  background: #1e3a20 !important;
+}
+
+/* CV Buttons Styling - Dark Theme */
+.form_field-wrapper button[onclick*="addCV"] {
+  background: #dc3545 !important;
+  color: white !important;
+  border: none !important;
+  padding: 10px 20px !important;
+  border-radius: 5px !important;
+  cursor: pointer !important;
+  font-size: 14px !important;
+  transition: all 0.3s ease !important;
+  font-weight: 500 !important;
+}
+
+.form_field-wrapper button[onclick*="addCV"]:hover {
+  background: #c82333 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4) !important;
+}
+
+.form_field-wrapper button[onclick*="removeCV"] {
+  background: #dc3545 !important;
+  color: white !important;
+  border: none !important;
+  padding: 6px 16px !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  transition: all 0.2s ease !important;
+}
+
+.form_field-wrapper button[onclick*="removeCV"]:hover {
+  background: #b02a37 !important;
+}
+
+/* CV Display - Dark Theme */
+#selected-cv-1, #selected-cv-2, #selected-cv-3 {
+  background: #2a4a2a !important;
+  border: 1px solid #28a745 !important;
+}
+
+#selected-cv-1 span, #selected-cv-2 span, #selected-cv-3 span {
+  color: #4ade80 !important;
 }
 
 /* Smooth transitions */
