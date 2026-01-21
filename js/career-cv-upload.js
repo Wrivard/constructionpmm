@@ -237,6 +237,9 @@ document.addEventListener('DOMContentLoaded', function() {
           body: formData
         });
         
+        console.log('📡 Response status:', response.status);
+        console.log('📡 Response ok:', response.ok);
+        
         if (response.status === 413) {
           throw new Error('Le fichier CV est trop volumineux. Maximum 5MB.');
         }
@@ -244,39 +247,51 @@ document.addEventListener('DOMContentLoaded', function() {
         let result;
         try {
           const responseText = await response.text();
+          console.log('📡 Response text:', responseText);
           result = responseText ? JSON.parse(responseText) : null;
+          console.log('📡 Parsed result:', result);
         } catch (parseError) {
+          console.error('❌ Parse error:', parseError);
           if (!response.ok) {
             throw new Error(`Erreur serveur (${response.status})`);
           }
           throw parseError;
         }
         
-        if (result && result.success) {
-          // Success animation
-          if (submitButton) {
-            const spinner = submitButton.querySelector('.submit-spinner');
-            if (spinner) spinner.remove();
-            
-            submitButton.value = '✓ Envoyé !';
-            submitButton.style.background = '#4caf50';
-            submitButton.style.animation = 'successPulse 0.6s ease';
-            
-            setTimeout(() => {
-              formElement.style.display = 'none';
-              if (successMessage) {
-                successMessage.style.display = 'block';
-                const successText = successMessage.querySelector('.success-text');
-                if (successText) successText.textContent = 'Merci! Votre candidature a été reçue avec succès.';
-              }
-              formElement.reset();
-              delete window.careerCVFiles[formNumber];
-              delete window.selectedJobs[formNumber];
-              updateCVDisplay(formNumber);
-            }, 1200);
-          }
-        } else {
+        // Check if response is successful
+        if (!response.ok) {
+          console.error('❌ Response not OK');
+          throw new Error(result?.message || `Erreur serveur (${response.status})`);
+        }
+        
+        if (!result || !result.success) {
+          console.error('❌ Result success is false or missing');
           throw new Error(result?.message || 'Erreur lors de l\'envoi');
+        }
+        
+        console.log('✅ Form submission successful!');
+        
+        // Success animation
+        if (submitButton) {
+          const spinner = submitButton.querySelector('.submit-spinner');
+          if (spinner) spinner.remove();
+          
+          submitButton.value = '✓ Envoyé !';
+          submitButton.style.background = '#28a745';
+          submitButton.style.animation = 'successPulse 0.6s ease';
+          
+          setTimeout(() => {
+            formElement.style.display = 'none';
+            if (successMessage) {
+              successMessage.style.display = 'block';
+              const successText = successMessage.querySelector('.success-text');
+              if (successText) successText.textContent = 'Merci ! Votre candidature a été reçue avec succès.';
+            }
+            formElement.reset();
+            delete window.careerCVFiles[formNumber];
+            delete window.selectedJobs[formNumber];
+            updateCVDisplay(formNumber);
+          }, 1200);
         }
       } catch (error) {
         // Remove spinner on error
