@@ -1,0 +1,259 @@
+/* Career Modal Custom Styling - PMM Branding */
+
+/* Modal Header */
+.heading-style-h2-3 {
+  color: #2c3e50 !important;
+  margin-bottom: 8px !important;
+}
+
+/* Input Fields Styling */
+.form_input-2 {
+  border: 2px solid #e0e0e0 !important;
+  border-radius: 6px !important;
+  padding: 14px 16px !important;
+  font-size: 15px !important;
+  transition: all 0.3s ease !important;
+  background: #ffffff !important;
+}
+
+.form_input-2:focus {
+  border-color: #dc3545 !important;
+  outline: none !important;
+  box-shadow: 0 0 0 4px rgba(220, 53, 69, 0.1) !important;
+}
+
+.form_input-2::placeholder {
+  color: #adb5bd !important;
+  font-size: 14px !important;
+}
+
+/* Textarea Styling */
+.form_input-2.is-text-area {
+  min-height: 120px !important;
+  resize: vertical !important;
+  font-family: inherit !important;
+}
+
+/* Labels */
+.form_field-label {
+  font-weight: 600 !important;
+  color: #2c3e50 !important;
+  margin-bottom: 8px !important;
+  font-size: 14px !important;
+  display: block !important;
+}
+
+/* Required Asterisk */
+.form_field-label::after {
+  color: #dc3545;
+  margin-left: 4px;
+}
+
+/* Checkbox Styling */
+.form_checkbox {
+  display: flex !important;
+  align-items: center !important;
+  cursor: pointer !important;
+  padding: 12px !important;
+  background: #f8f9fa !important;
+  border-radius: 6px !important;
+  transition: background 0.2s ease !important;
+}
+
+.form_checkbox:hover {
+  background: #e9ecef !important;
+}
+
+.form_checkbox-icon-2 {
+  border: 2px solid #dc3545 !important;
+  border-radius: 4px !important;
+  width: 20px !important;
+  height: 20px !important;
+  margin-right: 10px !important;
+  flex-shrink: 0 !important;
+  background: white !important;
+  transition: all 0.2s ease !important;
+}
+
+.form_checkbox input:checked + .form_checkbox-icon-2 {
+  background: #dc3545 !important;
+  border-color: #dc3545 !important;
+}
+
+.form_checkbox input:checked + .form_checkbox-icon-2::after {
+  content: "✓" !important;
+  color: white !important;
+  font-size: 14px !important;
+  font-weight: bold !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 100% !important;
+}
+
+.form_checkbox-label {
+  color: #495057 !important;
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+}
+
+/* Submit Button */
+.button-block-01 {
+  background: #dc3545 !important;
+  border: none !important;
+  padding: 16px 32px !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.2) !important;
+  width: 100% !important;
+}
+
+.button-block-01:hover {
+  background: #c82333 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 16px rgba(220, 53, 69, 0.3) !important;
+}
+
+.button-block-01:active {
+  transform: translateY(0) !important;
+}
+
+/* Modal Background */
+.contact-modal1_content-wrapper {
+  background: #ffffff !important;
+  border-radius: 16px !important;
+  padding: 40px !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3) !important;
+  max-width: 600px !important;
+  margin: 0 auto !important;
+}
+
+.contact-modal1_background-overlay {
+  backdrop-filter: blur(8px) !important;
+  background: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Close Button */
+.contact-modal1_close-button {
+  background: #f8f9fa !important;
+  border-radius: 50% !important;
+  width: 40px !important;
+  height: 40px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.2s ease !important;
+  position: absolute !important;
+  right: 20px !important;
+  top: 20px !important;
+}
+
+.contact-modal1_close-button:hover {
+  background: #dc3545 !important;
+  transform: rotate(90deg) !important;
+}
+
+.contact-modal1_close-button svg {
+  transition: color 0.2s ease !important;
+}
+
+.contact-modal1_close-button:hover svg {
+  color: white !important;
+}
+
+/* Form Field Wrapper */
+.form_field-wrapper {
+  margin-bottom: 20px !important;
+}
+
+/* Success Message */
+.form_message-success-wrapper {
+  background: #d4edda !important;
+  border: 2px solid #c3e6cb !important;
+  border-radius: 8px !important;
+  padding: 20px !important;
+}
+
+.success-text {
+  color: #155724 !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+}
+
+/* Error Message */
+.form_message-error-wrapper {
+  background: #f8d7da !important;
+  border: 2px solid #f5c6cb !important;
+  border-radius: 8px !important;
+  padding: 20px !important;
+}
+
+.error-text {
+  color: #721c24 !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+}
+
+/* CV Upload Section */
+.form_field-wrapper[style*="dashed"] {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%) !important;
+  border: 2px dashed #dc3545 !important;
+  border-radius: 8px !important;
+  padding: 24px !important;
+  transition: all 0.3s ease !important;
+}
+
+.form_field-wrapper[style*="dashed"]:hover {
+  border-color: #c82333 !important;
+  background: linear-gradient(135deg, #fff5f5 0%, #ffe6e6 100%) !important;
+}
+
+/* Spacing */
+.spacer-medium {
+  height: 24px !important;
+}
+
+.spacer-large {
+  height: 32px !important;
+}
+
+/* Modal Title Subtitle */
+.text-align-center-2 p {
+  color: #6c757d !important;
+  font-size: 14px !important;
+  margin-top: 8px !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .contact-modal1_content-wrapper {
+    padding: 24px !important;
+    border-radius: 12px !important;
+  }
+  
+  .form_input-2 {
+    padding: 12px 14px !important;
+  }
+  
+  .button-block-01 {
+    padding: 14px 24px !important;
+  }
+}
+
+/* Input validation states */
+.form_input-2:invalid:not(:placeholder-shown) {
+  border-color: #dc3545 !important;
+  background: #fff5f5 !important;
+}
+
+.form_input-2:valid:not(:placeholder-shown) {
+  border-color: #28a745 !important;
+}
+
+/* Smooth transitions */
+* {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
