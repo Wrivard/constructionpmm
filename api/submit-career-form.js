@@ -54,6 +54,7 @@ export default async function handler(req, res) {
     const phone = Array.isArray(fields['Contact-1-Phone']) ? fields['Contact-1-Phone'][0] : fields['Contact-1-Phone'];
     const email = Array.isArray(fields['Contact-1-Email']) ? fields['Contact-1-Email'][0] : fields['Contact-1-Email'];
     const message = Array.isArray(fields['Contact-1-Message']) ? fields['Contact-1-Message'][0] : fields['Contact-1-Message'];
+    const jobTitle = Array.isArray(fields['Job-Title']) ? fields['Job-Title'][0] : fields['Job-Title'];
     
     // Extract CV file
     let cvFile = files['Contact-1-CV'] || null;
@@ -124,6 +125,7 @@ export default async function handler(req, res) {
                   <td style="background-color: #2c3e50; color: #ffffff; text-align: center; padding: 30px;">
                     <h1 style="margin: 0; font-size: 28px; font-weight: bold;">📋 Nouvelle Candidature</h1>
                     <p style="margin: 10px 0 0 0; font-size: 16px; opacity: 0.9;">Une nouvelle candidature a été soumise</p>
+                    ${jobTitle ? `<div style="margin-top: 15px; background-color: #d4a574; display: inline-block; padding: 8px 20px; border-radius: 20px; font-size: 14px; font-weight: 600;">Poste: ${jobTitle}</div>` : ''}
                   </td>
                 </tr>
                 
@@ -132,6 +134,12 @@ export default async function handler(req, res) {
                   <td style="padding: 40px 30px; background-color: #ffffff;">
                     <h2 style="color: #2c3e50; margin: 0 0 20px 0; font-size: 20px; border-bottom: 2px solid #d4a574; padding-bottom: 10px;">👤 Informations du Candidat</h2>
                     <table width="100%" cellpadding="8" cellspacing="0" style="margin-bottom: 30px;">
+                      ${jobTitle ? `
+                      <tr>
+                        <td style="font-weight: bold; color: #2c3e50; width: 120px; vertical-align: top;">Poste:</td>
+                        <td style="color: #34495e;"><strong style="color: #d4a574;">${jobTitle}</strong></td>
+                      </tr>
+                      ` : ''}
                       <tr>
                         <td style="font-weight: bold; color: #2c3e50; width: 120px; vertical-align: top;">Nom:</td>
                         <td style="color: #34495e;">${name}</td>
@@ -178,10 +186,14 @@ export default async function handler(req, res) {
     `;
 
     // Send business email
+    const emailSubject = jobTitle 
+      ? `📋 Nouvelle Candidature - ${jobTitle} - ${name}`
+      : `📋 Nouvelle Candidature - ${name}`;
+    
     const emailData = {
       from: fromEmail,
       to: businessEmail,
-      subject: `📋 Nouvelle Candidature - ${name}`,
+      subject: emailSubject,
       html: businessEmailContent,
       replyTo: email
     };
@@ -230,11 +242,12 @@ export default async function handler(req, res) {
                   <td style="padding: 40px 30px; background-color: #ffffff; text-align: center;">
                     <p style="font-size: 18px; color: #2c3e50; margin: 0 0 20px 0;">Bonjour <strong>${name}</strong>,</p>
                     <p style="font-size: 16px; color: #34495e; line-height: 1.6; margin: 0 0 25px 0;">
-                      Merci de votre intérêt pour Construction PMM ! Nous avons bien reçu votre candidature et nous vous contacterons dans les <strong>5-7 jours ouvrables</strong>.
+                      Merci de votre intérêt pour Construction PMM ${jobTitle ? `pour le poste de <strong style="color: #d4a574;">${jobTitle}</strong>` : ''} ! Nous avons bien reçu votre candidature et nous vous contacterons dans les <strong>5-7 jours ouvrables</strong>.
                     </p>
                     <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #d4a574;">
                       <p style="margin: 0; color: #34495e; font-size: 14px;">
                         <strong>Votre candidature:</strong><br>
+                        ${jobTitle ? `✅ Poste: ${jobTitle}<br>` : ''}
                         ${cvFile && cvFile.filepath ? '✅ CV joint' : 'ℹ️ Aucun CV joint'}<br>
                         ${message ? '✅ Message inclus' : ''}
                       </p>

@@ -1,5 +1,6 @@
 // Career CV Upload Handler
 window.careerCVFiles = {};
+window.selectedJobs = {};
 
 function addCV(formNumber) {
   if (window.careerCVFiles[formNumber]) {
@@ -51,7 +52,7 @@ function updateCVDisplay(formNumber) {
   if (!window.careerCVFiles[formNumber]) {
     if (selectedCVDiv) selectedCVDiv.style.display = 'none';
     if (addButtonContainer) {
-      addButtonContainer.innerHTML = '<button type="button" onclick="addCV(' + formNumber + ')" style="background: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 14px;">📄 Ajouter votre CV</button>';
+      addButtonContainer.innerHTML = '<button type="button" onclick="addCV(' + formNumber + ')" class="cv-upload-btn" style="background: #d4a574; color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(212, 165, 116, 0.3);">📄 Ajouter votre CV</button>';
     }
   } else {
     const file = window.careerCVFiles[formNumber];
@@ -62,15 +63,56 @@ function updateCVDisplay(formNumber) {
       if (spanElement) spanElement.textContent = `${file.name} (${fileSizeMB} MB)`;
     }
     if (addButtonContainer) {
-      addButtonContainer.innerHTML = '<span style="color: #666; font-style: italic;">CV sélectionné</span>';
+      addButtonContainer.innerHTML = '<span style="color: #d4a574; font-style: italic; font-weight: 600;">✓ CV sélectionné</span>';
     }
   }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+  // Initialize CV displays
   for (let i = 1; i <= 3; i++) {
     updateCVDisplay(i);
   }
+  
+  // Add hover effect to CV upload buttons
+  document.addEventListener('mouseover', function(e) {
+    if (e.target.classList.contains('cv-upload-btn')) {
+      e.target.style.background = '#c99a66';
+      e.target.style.transform = 'translateY(-2px)';
+      e.target.style.boxShadow = '0 4px 8px rgba(212, 165, 116, 0.4)';
+    }
+  });
+  
+  document.addEventListener('mouseout', function(e) {
+    if (e.target.classList.contains('cv-upload-btn')) {
+      e.target.style.background = '#d4a574';
+      e.target.style.transform = 'translateY(0)';
+      e.target.style.boxShadow = '0 2px 4px rgba(212, 165, 116, 0.3)';
+    }
+  });
+  
+  // Handle job selection when modal opens
+  document.querySelectorAll('[data-w-id]').forEach(button => {
+    button.addEventListener('click', function(e) {
+      const jobTitle = this.closest('.career26_item')?.querySelector('.heading-style-h5')?.textContent?.trim();
+      if (jobTitle) {
+        const modalIndex = this.getAttribute('data-w-id').includes('38e6b010') ? 1 : 
+                          this.getAttribute('data-w-id').includes('5134edfc') ? 2 : 3;
+        window.selectedJobs[modalIndex] = jobTitle;
+        
+        // Update hidden field if it exists
+        setTimeout(() => {
+          const form = document.getElementById(`wf-form-Contact-1-Form-${modalIndex}`);
+          if (form) {
+            let jobInput = form.querySelector('input[name="Job-Title"]');
+            if (jobInput) {
+              jobInput.value = jobTitle;
+            }
+          }
+        }, 100);
+      }
+    });
+  });
   
   const forms = document.querySelectorAll('.career-form');
   forms.forEach((form, index) => {
@@ -80,8 +122,14 @@ document.addEventListener('DOMContentLoaded', function() {
       const formElement = e.target;
       const formData = new FormData(formElement);
       
+      // Add CV file if selected
       if (window.careerCVFiles[formNumber]) {
         formData.append('Contact-1-CV', window.careerCVFiles[formNumber]);
+      }
+      
+      // Add job title
+      if (window.selectedJobs[formNumber]) {
+        formData.append('Job-Title', window.selectedJobs[formNumber]);
       }
       
       const successMessage = formElement.querySelector('.w-form-done');
@@ -91,9 +139,47 @@ document.addEventListener('DOMContentLoaded', function() {
       
       const submitButton = formElement.querySelector('input[type="submit"]');
       const originalButtonValue = submitButton ? submitButton.value : '';
+      
+      // Create sending animation
       if (submitButton) {
         submitButton.disabled = true;
-        submitButton.value = 'Envoi en cours...';
+        submitButton.style.position = 'relative';
+        submitButton.style.background = '#d4a574';
+        submitButton.value = '';
+        
+        // Add spinner animation
+        const spinner = document.createElement('div');
+        spinner.className = 'submit-spinner';
+        spinner.style.cssText = `
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 20px;
+          height: 20px;
+          border: 3px solid rgba(255,255,255,0.3);
+          border-top-color: white;
+          border-radius: 50%;
+          animation: spin 0.8s linear infinite;
+        `;
+        submitButton.appendChild(spinner);
+        
+        // Add keyframe animation if not exists
+        if (!document.getElementById('spinner-style')) {
+          const style = document.createElement('style');
+          style.id = 'spinner-style';
+          style.textContent = `
+            @keyframes spin {
+              0% { transform: translate(-50%, -50%) rotate(0deg); }
+              100% { transform: translate(-50%, -50%) rotate(360deg); }
+            }
+            @keyframes successPulse {
+              0%, 100% { transform: scale(1); }
+              50% { transform: scale(1.05); }
+            }
+          `;
+          document.head.appendChild(style);
+        }
       }
       
       try {
@@ -118,19 +204,38 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         if (result && result.success) {
-          formElement.style.display = 'none';
-          if (successMessage) {
-            successMessage.style.display = 'block';
-            const successText = successMessage.querySelector('.success-text');
-            if (successText) successText.textContent = 'Merci! Votre candidature a été reçue avec succès.';
+          // Success animation
+          if (submitButton) {
+            const spinner = submitButton.querySelector('.submit-spinner');
+            if (spinner) spinner.remove();
+            
+            submitButton.value = '✓ Envoyé !';
+            submitButton.style.background = '#4caf50';
+            submitButton.style.animation = 'successPulse 0.6s ease';
+            
+            setTimeout(() => {
+              formElement.style.display = 'none';
+              if (successMessage) {
+                successMessage.style.display = 'block';
+                const successText = successMessage.querySelector('.success-text');
+                if (successText) successText.textContent = 'Merci! Votre candidature a été reçue avec succès.';
+              }
+              formElement.reset();
+              delete window.careerCVFiles[formNumber];
+              delete window.selectedJobs[formNumber];
+              updateCVDisplay(formNumber);
+            }, 1200);
           }
-          formElement.reset();
-          delete window.careerCVFiles[formNumber];
-          updateCVDisplay(formNumber);
         } else {
           throw new Error(result?.message || 'Erreur lors de l\'envoi');
         }
       } catch (error) {
+        // Remove spinner on error
+        if (submitButton) {
+          const spinner = submitButton.querySelector('.submit-spinner');
+          if (spinner) spinner.remove();
+        }
+        
         const errorMsg = error?.message?.replace(/</g, '&lt;').replace(/>/g, '&gt;') || 'Une erreur est survenue.';
         if (errorMessage) {
           errorMessage.style.display = 'block';
@@ -138,9 +243,10 @@ document.addEventListener('DOMContentLoaded', function() {
           if (errorText) errorText.textContent = errorMsg;
         }
       } finally {
-        if (submitButton) {
+        if (submitButton && !submitButton.value.includes('✓')) {
           submitButton.disabled = false;
           submitButton.value = originalButtonValue;
+          submitButton.style.background = '';
         }
       }
     });
