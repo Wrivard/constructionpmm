@@ -181,8 +181,18 @@ document.addEventListener('DOMContentLoaded', function() {
         formData.append('Job-Title', window.selectedJobs[formNumber]);
       }
       
-      const successMessage = formElement.querySelector('.w-form-done');
-      const errorMessage = formElement.querySelector('.w-form-fail');
+      // Success/error messages are siblings of the form, not children
+      const formParent = formElement.parentElement;
+      const successMessage = formParent ? formParent.querySelector('.w-form-done') : null;
+      const errorMessage = formParent ? formParent.querySelector('.w-form-fail') : null;
+      
+      console.log('📋 Form elements:', {
+        formElement: formElement ? 'exists' : 'null',
+        formParent: formParent ? 'exists' : 'null',
+        successMessage: successMessage ? 'exists' : 'null',
+        errorMessage: errorMessage ? 'exists' : 'null'
+      });
+      
       if (successMessage) successMessage.style.display = 'none';
       if (errorMessage) errorMessage.style.display = 'none';
       
