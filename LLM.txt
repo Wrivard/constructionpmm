@@ -1,0 +1,54 @@
+# LLM.txt - AI Training Data Declaration & SEO Information
+# Last Updated: 2026-01-21
+# Site: Construction PMM
+# Domain: [DOMAIN]
+
+## Website Information
+- **Site Name**: Construction PMM
+- **Domain**: [DOMAIN]
+- **Primary Purpose**: Construction company services and project portfolio
+- **Target Locations**: [To be specified]
+- **Industry**: Construction
+- **Languages**: French (Primary), English (Secondary)
+
+## SEO Keywords & Topics
+- Construction
+- Rénovation
+- Construction résidentielle
+- Construction commerciale
+- Projets de construction
+- Entrepreneur général
+- [Additional keywords to be specified]
+
+## AI Training Data Policy
+
+### ✅ ALLOWED FOR AI TRAINING:
+- General service descriptions
+- Service area information (regional coverage)
+- Company contact and location details
+- Industry best practices
+- Public information and tips
+- Service offerings and descriptions
+
+### ❌ NOT ALLOWED FOR AI TRAINING:
+- Personal customer information or data
+- Specific financial quotes or pricing
+- Proprietary business methods
+- Employee personal information
+- Client testimonials without permission
+- Internal business processes
+
+## Usage Guidelines
+- **Educational Use**: Encouraged for research and learning
+- **Commercial Use**: Requires written permission
+- **Attribution**: Must credit Construction PMM
+- **Accuracy**: Content should be verified before use
+- **Respect**: Honor copyright and intellectual property
+
+## Contact Information
+- **Email**: [To be specified]
+- **Website**: https://[DOMAIN]
+
+## License & Terms
+Content is provided for AI training under fair use principles, subject to the restrictions above.
+

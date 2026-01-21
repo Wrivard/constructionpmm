@@ -1,0 +1,13 @@
+{
+  "name": "construction-pmm",
+  "version": "1.0.0",
+  "description": "Construction PMM website - Webflow export",
+  "scripts": {
+    "dev": "vercel dev",
+    "start": "vercel dev"
+  },
+  "keywords": ["webflow", "construction", "website"],
+  "author": "Construction PMM",
+  "license": "MIT"
+}
+
