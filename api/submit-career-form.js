@@ -158,6 +158,7 @@ export default async function handler(req, res) {
                 <!-- Header avec logo -->
                 <tr>
                   <td style="background: linear-gradient(135deg, #1b1b1b 0%, #2a2a2a 100%); padding: 40px 30px; text-align: center; border-bottom: 3px solid #dc3545;">
+                    <img src="https://constructionpmm.com/images/logo-1.webp" alt="Construction PMM" style="max-width: 140px; height: auto; margin-bottom: 20px;">
                     <h1 style="margin: 0; font-size: 32px; font-weight: 700; color: #ffffff; letter-spacing: -0.5px;">
                       📋 Nouvelle Candidature
                     </h1>
@@ -324,7 +325,8 @@ export default async function handler(req, res) {
                 
                 <!-- Header Success -->
                 <tr>
-                  <td style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%); padding: 50px 30px; text-align: center;">
+                  <td style="background: linear-gradient(135deg, #dc3545 0%, #c82333 100%); padding: 50px 30px; text-align: center;">
+                    <img src="https://constructionpmm.com/images/logo-1.webp" alt="Construction PMM" style="max-width: 140px; height: auto; margin-bottom: 24px;">
                     <div style="font-size: 64px; margin-bottom: 16px;">✓</div>
                     <h1 style="margin: 0; font-size: 32px; font-weight: 700; color: #ffffff; letter-spacing: -0.5px;">
                       Candidature envoyée !
@@ -349,7 +351,7 @@ export default async function handler(req, res) {
                     </p>
                     
                     <!-- Info Box -->
-                    <div style="background-color: #1b1b1b; padding: 28px; border-radius: 8px; border-left: 4px solid #28a745; margin-bottom: 30px;">
+                    <div style="background-color: #1b1b1b; padding: 28px; border-radius: 8px; border-left: 4px solid #dc3545; margin-bottom: 30px;">
                       <h3 style="color: #ffffff; margin: 0 0 16px 0; font-size: 18px; font-weight: 600;">
                         📋 Récapitulatif de votre candidature
                       </h3>
@@ -362,13 +364,13 @@ export default async function handler(req, res) {
                         ` : ''}
                         <tr>
                           <td style="color: #999999; font-size: 14px; padding: 8px 0;">CV :</td>
-                          <td style="color: ${cvFile && cvFile.filepath ? '#28a745' : '#ffc107'}; font-size: 15px; font-weight: 500; text-align: right;">
+                          <td style="color: ${cvFile && cvFile.filepath ? '#dc3545' : '#ffc107'}; font-size: 15px; font-weight: 500; text-align: right;">
                             ${cvFile && cvFile.filepath ? '✓ Joint' : 'Non fourni'}
                           </td>
                         </tr>
                         <tr>
                           <td style="color: #999999; font-size: 14px; padding: 8px 0;">Message :</td>
-                          <td style="color: ${message ? '#28a745' : '#999999'}; font-size: 15px; font-weight: 500; text-align: right;">
+                          <td style="color: ${message ? '#dc3545' : '#999999'}; font-size: 15px; font-weight: 500; text-align: right;">
                             ${message ? '✓ Inclus' : 'Non inclus'}
                           </td>
                         </tr>
