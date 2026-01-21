@@ -112,7 +112,7 @@ function updateCVDisplay(formNumber) {
       if (spanElement) spanElement.textContent = `✓ ${file.name} (${fileSizeMB} Mo)`;
     }
     if (addButtonContainer) {
-      addButtonContainer.innerHTML = '<span style="color: #28a745; font-style: italic; font-weight: 600;">✓ Fichier sélectionné</span>';
+      addButtonContainer.innerHTML = '<span style="color: #ffffff; font-style: italic; font-weight: 600;">✓ Fichier sélectionné</span>';
     }
   }
 }
