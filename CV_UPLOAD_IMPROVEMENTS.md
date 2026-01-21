@@ -2,22 +2,22 @@
 
 ## ✅ Modifications complétées
 
-### 1. 🎨 Couleurs de marque (#d4a574)
+### 1. 🎨 Couleurs du bouton
 
 **Bouton "Ajouter votre CV"**
-- Couleur principale : `#d4a574` (or/bronze PMM)
-- Hover : `#c99a66` (version plus foncée)
-- Shadow : `rgba(212, 165, 116, 0.3)`
+- Couleur principale : `#dc3545` (rouge)
+- Hover : `#c82333` (rouge foncé)
+- Shadow : `rgba(220, 53, 69, 0.3)`
 - Effet hover : Translation Y + ombre plus prononcée
 
 **État "CV sélectionné"**
-- Texte en `#d4a574` avec checkmark `✓`
+- Texte en `#dc3545` avec checkmark `✓`
 - Style : italique + gras
 
 ### 2. ⚡ Animation d'envoi moderne
 
 **Phase 1 : Envoi en cours**
-- Bouton désactivé avec background `#d4a574`
+- Bouton désactivé avec background `#dc3545`
 - Spinner rotatif animé (border-top blanc)
 - Animation CSS : `spin 0.8s linear infinite`
 - Texte du bouton vide pendant le chargement
@@ -113,7 +113,7 @@ Récapitulatif :
 
 /* Bouton CV */
 .cv-upload-btn {
-  background: #d4a574;
+  background: #dc3545;
   color: white;
   border: none;
   padding: 12px 24px;
@@ -122,13 +122,13 @@ Récapitulatif :
   font-size: 14px;
   font-weight: 600;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(212, 165, 116, 0.3);
+  box-shadow: 0 2px 4px rgba(220, 53, 69, 0.3);
 }
 
 .cv-upload-btn:hover {
-  background: #c99a66;
+  background: #c82333;
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(212, 165, 116, 0.4);
+  box-shadow: 0 4px 8px rgba(220, 53, 69, 0.4);
 }
 ```
 
@@ -137,7 +137,7 @@ Récapitulatif :
 1. **Utilisateur clique sur "Postuler"** pour un poste spécifique
 2. **Modal s'ouvre** avec le poste pré-sélectionné (champ caché)
 3. **Utilisateur remplit** le formulaire
-4. **Utilisateur ajoute** son CV (bouton or PMM)
+4. **Utilisateur ajoute** son CV (bouton rouge)
 5. **Utilisateur soumet** le formulaire
 6. **Animation de chargement** avec spinner rotatif
 7. **Animation de succès** avec checkmark + pulse vert
@@ -153,7 +153,7 @@ Récapitulatif :
 - ❌ Emails sans contexte du poste
 
 ### Après
-- ✅ Boutons couleur marque PMM (#d4a574)
+- ✅ Boutons rouge (#dc3545) avec hover
 - ✅ Animation moderne (spinner → checkmark)
 - ✅ Poste automatiquement capturé et envoyé
 - ✅ Emails contextualisés avec le nom du poste
@@ -163,7 +163,7 @@ Récapitulatif :
 Pour tester :
 1. Aller sur la page carrière
 2. Cliquer sur "Postuler" pour "Charpentier-menuisier"
-3. Vérifier que le bouton CV est or/bronze
+3. Vérifier que le bouton CV est rouge
 4. Ajouter un CV
 5. Remplir le formulaire
 6. Soumettre et observer l'animation
@@ -171,7 +171,7 @@ Pour tester :
 
 ## 🎯 Avantages
 
-1. **Branding cohérent** - Couleurs PMM partout
+1. **Bouton rouge accrocheur** - Attire l'attention sur le CV
 2. **UX moderne** - Animations fluides et professionnelles
 3. **Tracking amélioré** - Savoir quel poste intéresse le candidat
 4. **Emails contextualisés** - Meilleure organisation des candidatures

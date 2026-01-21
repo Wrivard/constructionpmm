@@ -2302,19 +2302,20 @@ margin: 0rem !important;
                               <div class="contact-modal1_form-block w-form">
                                 <form id="wf-form-Contact-1-Form-1" name="wf-form-Contact-1-Form-1" data-name="Contact 1 Form 1" method="post" enctype="multipart/form-data" class="contact-modal1_form career-form" data-wf-page-id="6941a7bb55ffa1a41c5b8a28" data-wf-element-id="38e6b010-294a-4c96-bdff-408fa9ff9162">
                                   <input type="hidden" name="Job-Title" value="">
-                                  <div class="form_field-wrapper"><label for="Contact-1-Name" class="form_field-label">Nom</label><input class="form_input-2 w-input" maxlength="256" name="Contact-1-Name" data-name="Contact 1 Name" placeholder="" type="text" id="Contact-1-Name" required=""></div>
-                                  <div class="form_field-wrapper"><label for="Contact-1-Phone-1" class="form_field-label">Téléphone</label><input class="form_input-2 w-input" maxlength="256" name="Contact-1-Phone" data-name="Contact 1 Phone" placeholder="" type="tel" id="Contact-1-Phone-1" required=""></div>
-                                  <div class="form_field-wrapper"><label for="Contact-1-Email" class="form_field-label">Email</label><input class="form_input-2 w-input" maxlength="256" name="Contact-1-Email" data-name="Contact 1 Email" placeholder="" type="email" id="Contact-1-Email" required=""></div>
+                                  <div class="form_field-wrapper"><label for="Contact-1-Name" class="form_field-label">Nom *</label><input class="form_input-2 w-input" maxlength="256" name="Contact-1-Name" data-name="Contact 1 Name" placeholder="Jean Dupont" type="text" id="Contact-1-Name" required="" oninvalid="this.setCustomValidity('Veuillez remplir ce champ')" oninput="this.setCustomValidity('')"></div>
+                                  <div class="form_field-wrapper"><label for="Contact-1-Phone-1" class="form_field-label">Téléphone *</label><input class="form_input-2 w-input" maxlength="256" name="Contact-1-Phone" data-name="Contact 1 Phone" placeholder="514-555-1234" type="tel" id="Contact-1-Phone-1" required="" oninvalid="this.setCustomValidity('Veuillez entrer un numéro de téléphone')" oninput="this.setCustomValidity('')"></div>
+                                  <div class="form_field-wrapper"><label for="Contact-1-Email" class="form_field-label">Email *</label><input class="form_input-2 w-input" maxlength="256" name="Contact-1-Email" data-name="Contact 1 Email" placeholder="exemple@email.com" type="email" id="Contact-1-Email" required="" oninvalid="this.setCustomValidity('Veuillez entrer une adresse email valide')" oninput="this.setCustomValidity('')"></div>
                                   <div class="form_field-wrapper"><label for="Contact-1-Message" class="form_field-label">Message</label><textarea id="Contact-1-Message" name="Contact-1-Message" maxlength="5000" data-name="Contact 1 Message" placeholder="Type your message..." class="form_input-2 is-text-area w-input"></textarea></div>
-                                  <div class="form_field-wrapper">
-                                    <label class="form_field-label">CV (PDF, DOC, DOCX - Max 5MB)</label>
+                                  <div class="form_field-wrapper" style="background: #f8f9fa; padding: 20px; border-radius: 8px; border: 2px dashed #dee2e6;">
+                                    <label class="form_field-label" style="margin-bottom: 12px; font-weight: 600;">📎 CV (optionnel)</label>
+                                    <p style="font-size: 13px; color: #6c757d; margin-bottom: 15px;">PDF, DOC ou DOCX - Maximum 5 Mo</p>
                                     <div id="add-cv-button-1" style="margin-bottom: 10px;">
-                                      <button type="button" onclick="addCV(1)" style="background: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 14px;">📄 Ajouter votre CV</button>
+                                      <button type="button" onclick="addCV(1)" style="background: #dc3545; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 14px;">📄 Ajouter votre CV</button>
                                     </div>
-                                    <div id="selected-cv-1" style="display: none; background: #f0f0f0; padding: 10px; border-radius: 5px; margin-top: 10px;">
+                                    <div id="selected-cv-1" style="display: none; background: #e7f3e7; padding: 12px; border-radius: 6px; border: 1px solid #c3e6c3; margin-top: 10px;">
                                       <div id="cv-display-1" style="display: flex; align-items: center; justify-content: space-between;">
-                                        <span style="color: #333; font-size: 14px;">Aucun fichier</span>
-                                        <button type="button" onclick="removeCV(1)" style="background: #dc3545; color: white; border: none; padding: 5px 15px; border-radius: 3px; cursor: pointer; font-size: 12px;">Retirer</button>
+                                        <span style="color: #155724; font-size: 14px; font-weight: 500;">Aucun fichier</span>
+                                        <button type="button" onclick="removeCV(1)" style="background: #dc3545; color: white; border: none; padding: 6px 16px; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: 600;">✕ Retirer</button>
                                       </div>
                                     </div>
                                   </div>
@@ -2385,19 +2386,20 @@ margin: 0rem !important;
                               <div class="contact-modal1_form-block w-form">
                                 <form id="wf-form-Contact-1-Form-2" name="wf-form-Contact-1-Form-2" data-name="Contact 1 Form 2" method="post" enctype="multipart/form-data" class="contact-modal1_form career-form" data-wf-page-id="6941a7bb55ffa1a41c5b8a28" data-wf-element-id="5134edfc-e422-c80e-4683-988ab3e05d53">
                                   <input type="hidden" name="Job-Title" value="">
-                                  <div class="form_field-wrapper"><label for="Contact-1-Name" class="form_field-label">Nom</label><input class="form_input-2 w-input" maxlength="256" name="Contact-1-Name" data-name="Contact 1 Name" placeholder="" type="text" id="Contact-1-Name" required=""></div>
-                                  <div class="form_field-wrapper"><label for="Contact-1-Phone-2" class="form_field-label">Téléphone</label><input class="form_input-2 w-input" maxlength="256" name="Contact-1-Phone" data-name="Contact 1 Phone" placeholder="" type="tel" id="Contact-1-Phone-2" required=""></div>
-                                  <div class="form_field-wrapper"><label for="Contact-1-Email" class="form_field-label">Email</label><input class="form_input-2 w-input" maxlength="256" name="Contact-1-Email" data-name="Contact 1 Email" placeholder="" type="email" id="Contact-1-Email" required=""></div>
+                                  <div class="form_field-wrapper"><label for="Contact-1-Name" class="form_field-label">Nom *</label><input class="form_input-2 w-input" maxlength="256" name="Contact-1-Name" data-name="Contact 1 Name" placeholder="Jean Dupont" type="text" id="Contact-1-Name" required="" oninvalid="this.setCustomValidity('Veuillez remplir ce champ')" oninput="this.setCustomValidity('')"></div>
+                                  <div class="form_field-wrapper"><label for="Contact-1-Phone-2" class="form_field-label">Téléphone *</label><input class="form_input-2 w-input" maxlength="256" name="Contact-1-Phone" data-name="Contact 1 Phone" placeholder="514-555-1234" type="tel" id="Contact-1-Phone-2" required="" oninvalid="this.setCustomValidity('Veuillez entrer un numéro de téléphone')" oninput="this.setCustomValidity('')"></div>
+                                  <div class="form_field-wrapper"><label for="Contact-1-Email" class="form_field-label">Email *</label><input class="form_input-2 w-input" maxlength="256" name="Contact-1-Email" data-name="Contact 1 Email" placeholder="exemple@email.com" type="email" id="Contact-1-Email" required="" oninvalid="this.setCustomValidity('Veuillez entrer une adresse email valide')" oninput="this.setCustomValidity('')"></div>
                                   <div class="form_field-wrapper"><label for="Contact-1-Message" class="form_field-label">Message</label><textarea id="Contact-1-Message" name="Contact-1-Message" maxlength="5000" data-name="Contact 1 Message" placeholder="Type your message..." class="form_input-2 is-text-area w-input"></textarea></div>
-                                  <div class="form_field-wrapper">
-                                    <label class="form_field-label">CV (PDF, DOC, DOCX - Max 5MB)</label>
+                                  <div class="form_field-wrapper" style="background: #f8f9fa; padding: 20px; border-radius: 8px; border: 2px dashed #dee2e6;">
+                                    <label class="form_field-label" style="margin-bottom: 12px; font-weight: 600;">📎 CV (optionnel)</label>
+                                    <p style="font-size: 13px; color: #6c757d; margin-bottom: 15px;">PDF, DOC ou DOCX - Maximum 5 Mo</p>
                                     <div id="add-cv-button-2" style="margin-bottom: 10px;">
-                                      <button type="button" onclick="addCV(2)" style="background: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 14px;">📄 Ajouter votre CV</button>
+                                      <button type="button" onclick="addCV(2)" style="background: #dc3545; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 14px;">📄 Ajouter votre CV</button>
                                     </div>
-                                    <div id="selected-cv-2" style="display: none; background: #f0f0f0; padding: 10px; border-radius: 5px; margin-top: 10px;">
+                                    <div id="selected-cv-2" style="display: none; background: #e7f3e7; padding: 12px; border-radius: 6px; border: 1px solid #c3e6c3; margin-top: 10px;">
                                       <div id="cv-display-2" style="display: flex; align-items: center; justify-content: space-between;">
-                                        <span style="color: #333; font-size: 14px;">Aucun fichier</span>
-                                        <button type="button" onclick="removeCV(2)" style="background: #dc3545; color: white; border: none; padding: 5px 15px; border-radius: 3px; cursor: pointer; font-size: 12px;">Retirer</button>
+                                        <span style="color: #155724; font-size: 14px; font-weight: 500;">Aucun fichier</span>
+                                        <button type="button" onclick="removeCV(2)" style="background: #dc3545; color: white; border: none; padding: 6px 16px; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: 600;">✕ Retirer</button>
                                       </div>
                                     </div>
                                   </div>
@@ -2468,19 +2470,20 @@ margin: 0rem !important;
                               <div class="contact-modal1_form-block w-form">
                                 <form id="wf-form-Contact-1-Form-3" name="wf-form-Contact-1-Form-3" data-name="Contact 1 Form 3" method="post" enctype="multipart/form-data" class="contact-modal1_form career-form" data-wf-page-id="6941a7bb55ffa1a41c5b8a28" data-wf-element-id="38225a3c-b7e9-9e52-04b2-ddb71f93578b">
                                   <input type="hidden" name="Job-Title" value="">
-                                  <div class="form_field-wrapper"><label for="Contact-1-Name" class="form_field-label">Nom</label><input class="form_input-2 w-input" maxlength="256" name="Contact-1-Name" data-name="Contact 1 Name" placeholder="" type="text" id="Contact-1-Name" required=""></div>
-                                  <div class="form_field-wrapper"><label for="Contact-1-Phone-3" class="form_field-label">Téléphone</label><input class="form_input-2 w-input" maxlength="256" name="Contact-1-Phone" data-name="Contact 1 Phone" placeholder="" type="tel" id="Contact-1-Phone-3" required=""></div>
-                                  <div class="form_field-wrapper"><label for="Contact-1-Email" class="form_field-label">Email</label><input class="form_input-2 w-input" maxlength="256" name="Contact-1-Email" data-name="Contact 1 Email" placeholder="" type="email" id="Contact-1-Email" required=""></div>
+                                  <div class="form_field-wrapper"><label for="Contact-1-Name" class="form_field-label">Nom *</label><input class="form_input-2 w-input" maxlength="256" name="Contact-1-Name" data-name="Contact 1 Name" placeholder="Jean Dupont" type="text" id="Contact-1-Name" required="" oninvalid="this.setCustomValidity('Veuillez remplir ce champ')" oninput="this.setCustomValidity('')"></div>
+                                  <div class="form_field-wrapper"><label for="Contact-1-Phone-3" class="form_field-label">Téléphone *</label><input class="form_input-2 w-input" maxlength="256" name="Contact-1-Phone" data-name="Contact 1 Phone" placeholder="514-555-1234" type="tel" id="Contact-1-Phone-3" required="" oninvalid="this.setCustomValidity('Veuillez entrer un numéro de téléphone')" oninput="this.setCustomValidity('')"></div>
+                                  <div class="form_field-wrapper"><label for="Contact-1-Email" class="form_field-label">Email *</label><input class="form_input-2 w-input" maxlength="256" name="Contact-1-Email" data-name="Contact 1 Email" placeholder="exemple@email.com" type="email" id="Contact-1-Email" required="" oninvalid="this.setCustomValidity('Veuillez entrer une adresse email valide')" oninput="this.setCustomValidity('')"></div>
                                   <div class="form_field-wrapper"><label for="Contact-1-Message" class="form_field-label">Message</label><textarea id="Contact-1-Message" name="Contact-1-Message" maxlength="5000" data-name="Contact 1 Message" placeholder="Type your message..." class="form_input-2 is-text-area w-input"></textarea></div>
-                                  <div class="form_field-wrapper">
-                                    <label class="form_field-label">CV (PDF, DOC, DOCX - Max 5MB)</label>
+                                  <div class="form_field-wrapper" style="background: #f8f9fa; padding: 20px; border-radius: 8px; border: 2px dashed #dee2e6;">
+                                    <label class="form_field-label" style="margin-bottom: 12px; font-weight: 600;">📎 CV (optionnel)</label>
+                                    <p style="font-size: 13px; color: #6c757d; margin-bottom: 15px;">PDF, DOC ou DOCX - Maximum 5 Mo</p>
                                     <div id="add-cv-button-3" style="margin-bottom: 10px;">
-                                      <button type="button" onclick="addCV(3)" style="background: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 14px;">📄 Ajouter votre CV</button>
+                                      <button type="button" onclick="addCV(3)" style="background: #dc3545; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 14px;">📄 Ajouter votre CV</button>
                                     </div>
-                                    <div id="selected-cv-3" style="display: none; background: #f0f0f0; padding: 10px; border-radius: 5px; margin-top: 10px;">
+                                    <div id="selected-cv-3" style="display: none; background: #e7f3e7; padding: 12px; border-radius: 6px; border: 1px solid #c3e6c3; margin-top: 10px;">
                                       <div id="cv-display-3" style="display: flex; align-items: center; justify-content: space-between;">
-                                        <span style="color: #333; font-size: 14px;">Aucun fichier</span>
-                                        <button type="button" onclick="removeCV(3)" style="background: #dc3545; color: white; border: none; padding: 5px 15px; border-radius: 3px; cursor: pointer; font-size: 12px;">Retirer</button>
+                                        <span style="color: #155724; font-size: 14px; font-weight: 500;">Aucun fichier</span>
+                                        <button type="button" onclick="removeCV(3)" style="background: #dc3545; color: white; border: none; padding: 6px 16px; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: 600;">✕ Retirer</button>
                                       </div>
                                     </div>
                                   </div>

@@ -4,7 +4,7 @@ window.selectedJobs = {};
 
 function addCV(formNumber) {
   if (window.careerCVFiles[formNumber]) {
-    alert('Vous avez déjà sélectionné un CV. Veuillez le retirer avant d\'en ajouter un autre.');
+    showCustomAlert('Vous avez déjà sélectionné un CV. Veuillez le retirer avant d\'en ajouter un autre.', 'warning');
     return;
   }
   
@@ -18,14 +18,14 @@ function addCV(formNumber) {
     if (file) {
       const maxFileSize = 5 * 1024 * 1024;
       if (file.size > maxFileSize) {
-        alert('Le fichier est trop volumineux. Maximum 5MB.');
+        showCustomAlert('Le fichier est trop volumineux. Taille maximale : 5 Mo', 'error');
         return;
       }
       
       const allowedExtensions = ['.pdf', '.doc', '.docx'];
       const fileExtension = '.' + file.name.split('.').pop().toLowerCase();
       if (!allowedExtensions.includes(fileExtension)) {
-        alert('Format non accepté. Veuillez sélectionner un fichier PDF, DOC ou DOCX.');
+        showCustomAlert('Format non accepté. Veuillez sélectionner un fichier PDF, DOC ou DOCX.', 'error');
         return;
       }
       
@@ -37,6 +37,55 @@ function addCV(formNumber) {
   document.body.appendChild(input);
   input.click();
   document.body.removeChild(input);
+}
+
+// Custom alert function for better UX
+function showCustomAlert(message, type = 'info') {
+  const existingAlert = document.querySelector('.custom-alert');
+  if (existingAlert) existingAlert.remove();
+  
+  const alert = document.createElement('div');
+  alert.className = 'custom-alert';
+  alert.style.cssText = `
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: ${type === 'error' ? '#dc3545' : type === 'warning' ? '#ffc107' : '#28a745'};
+    color: white;
+    padding: 16px 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 10000;
+    font-size: 14px;
+    font-weight: 500;
+    max-width: 400px;
+    animation: slideIn 0.3s ease;
+  `;
+  alert.textContent = message;
+  
+  document.body.appendChild(alert);
+  
+  setTimeout(() => {
+    alert.style.animation = 'slideOut 0.3s ease';
+    setTimeout(() => alert.remove(), 300);
+  }, 3000);
+  
+  // Add animations
+  if (!document.getElementById('alert-animations')) {
+    const style = document.createElement('style');
+    style.id = 'alert-animations';
+    style.textContent = `
+      @keyframes slideIn {
+        from { transform: translateX(400px); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+      }
+      @keyframes slideOut {
+        from { transform: translateX(0); opacity: 1; }
+        to { transform: translateX(400px); opacity: 0; }
+      }
+    `;
+    document.head.appendChild(style);
+  }
 }
 
 function removeCV(formNumber) {
@@ -52,7 +101,7 @@ function updateCVDisplay(formNumber) {
   if (!window.careerCVFiles[formNumber]) {
     if (selectedCVDiv) selectedCVDiv.style.display = 'none';
     if (addButtonContainer) {
-      addButtonContainer.innerHTML = '<button type="button" onclick="addCV(' + formNumber + ')" class="cv-upload-btn" style="background: #d4a574; color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(212, 165, 116, 0.3);">📄 Ajouter votre CV</button>';
+      addButtonContainer.innerHTML = '<button type="button" onclick="addCV(' + formNumber + ')" class="cv-upload-btn" style="background: #dc3545; color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(220, 53, 69, 0.3);">📄 Sélectionner un fichier</button>';
     }
   } else {
     const file = window.careerCVFiles[formNumber];
@@ -60,10 +109,10 @@ function updateCVDisplay(formNumber) {
     if (selectedCVDiv) selectedCVDiv.style.display = 'block';
     if (cvDisplay) {
       const spanElement = cvDisplay.querySelector('span');
-      if (spanElement) spanElement.textContent = `${file.name} (${fileSizeMB} MB)`;
+      if (spanElement) spanElement.textContent = `✓ ${file.name} (${fileSizeMB} Mo)`;
     }
     if (addButtonContainer) {
-      addButtonContainer.innerHTML = '<span style="color: #d4a574; font-style: italic; font-weight: 600;">✓ CV sélectionné</span>';
+      addButtonContainer.innerHTML = '<span style="color: #28a745; font-style: italic; font-weight: 600;">✓ Fichier sélectionné</span>';
     }
   }
 }
@@ -77,17 +126,17 @@ document.addEventListener('DOMContentLoaded', function() {
   // Add hover effect to CV upload buttons
   document.addEventListener('mouseover', function(e) {
     if (e.target.classList.contains('cv-upload-btn')) {
-      e.target.style.background = '#c99a66';
+      e.target.style.background = '#c82333';
       e.target.style.transform = 'translateY(-2px)';
-      e.target.style.boxShadow = '0 4px 8px rgba(212, 165, 116, 0.4)';
+      e.target.style.boxShadow = '0 4px 8px rgba(220, 53, 69, 0.4)';
     }
   });
   
   document.addEventListener('mouseout', function(e) {
     if (e.target.classList.contains('cv-upload-btn')) {
-      e.target.style.background = '#d4a574';
+      e.target.style.background = '#dc3545';
       e.target.style.transform = 'translateY(0)';
-      e.target.style.boxShadow = '0 2px 4px rgba(212, 165, 116, 0.3)';
+      e.target.style.boxShadow = '0 2px 4px rgba(220, 53, 69, 0.3)';
     }
   });
   
@@ -144,7 +193,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (submitButton) {
         submitButton.disabled = true;
         submitButton.style.position = 'relative';
-        submitButton.style.background = '#d4a574';
+        submitButton.style.background = '#dc3545';
         submitButton.value = '';
         
         // Add spinner animation
