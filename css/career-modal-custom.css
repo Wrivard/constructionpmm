@@ -102,6 +102,7 @@
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
+  padding: 0 !important;
 }
 
 .form_checkbox-icon-2:hover,
@@ -144,9 +145,11 @@ input[type="checkbox"]:checked + * + .form_checkbox-icon-2::after,
   height: 10px !important;
   border: solid white !important;
   border-width: 0 2.5px 2.5px 0 !important;
-  transform: rotate(45deg) translate(-50%, -50%) scale(1) !important;
-  top: 45% !important;
+  transform: rotate(45deg) scale(1) !important;
+  top: 50% !important;
   left: 50% !important;
+  margin-top: -6px !important;
+  margin-left: -3px !important;
   display: block !important;
   animation: checkmarkAppear 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
@@ -154,13 +157,13 @@ input[type="checkbox"]:checked + * + .form_checkbox-icon-2::after,
 /* Checkmark animation */
 @keyframes checkmarkAppear {
   0% {
-    transform: rotate(45deg) translate(-50%, -50%) scale(0);
+    transform: rotate(45deg) scale(0);
   }
   50% {
-    transform: rotate(45deg) translate(-50%, -50%) scale(1.1);
+    transform: rotate(45deg) scale(1.1);
   }
   100% {
-    transform: rotate(45deg) translate(-50%, -50%) scale(1);
+    transform: rotate(45deg) scale(1);
   }
 }
 
