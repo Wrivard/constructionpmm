@@ -193,8 +193,15 @@ document.addEventListener('DOMContentLoaded', function() {
         errorMessage: errorMessage ? 'exists' : 'null'
       });
       
-      if (successMessage) successMessage.style.display = 'none';
-      if (errorMessage) errorMessage.style.display = 'none';
+      // Hide messages immediately and forcefully
+      if (successMessage) {
+        successMessage.style.setProperty('display', 'none', 'important');
+        successMessage.style.visibility = 'hidden';
+      }
+      if (errorMessage) {
+        errorMessage.style.setProperty('display', 'none', 'important');
+        errorMessage.style.visibility = 'hidden';
+      }
       
       const submitButton = formElement.querySelector('input[type="submit"]');
       const originalButtonValue = submitButton ? submitButton.value : '';
@@ -305,7 +312,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Hide error message explicitly
                 if (errorMessage) {
-                  errorMessage.style.display = 'none';
+                  errorMessage.style.setProperty('display', 'none', 'important');
+                  errorMessage.style.visibility = 'hidden';
                   console.log('  - Error message hidden');
                 }
                 
@@ -313,7 +321,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log('  - Form hidden');
                 
                 if (successMessage) {
-                  successMessage.style.display = 'block';
+                  successMessage.style.setProperty('display', 'block', 'important');
+                  successMessage.style.visibility = 'visible';
                   const successText = successMessage.querySelector('.success-text');
                   if (successText) {
                     successText.textContent = 'Merci ! Votre candidature a été reçue avec succès.';
@@ -349,12 +358,14 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Hide success message and show error message
         if (successMessage) {
-          successMessage.style.display = 'none';
+          successMessage.style.setProperty('display', 'none', 'important');
+          successMessage.style.visibility = 'hidden';
         }
         
         const errorMsg = error?.message?.replace(/</g, '&lt;').replace(/>/g, '&gt;') || 'Une erreur est survenue.';
         if (errorMessage) {
-          errorMessage.style.display = 'block';
+          errorMessage.style.setProperty('display', 'block', 'important');
+          errorMessage.style.visibility = 'visible';
           const errorText = errorMessage.querySelector('.error-text');
           if (errorText) errorText.textContent = errorMsg;
         }
