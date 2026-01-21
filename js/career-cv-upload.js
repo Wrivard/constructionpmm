@@ -301,3 +301,59 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+
+// Enhanced Checkbox Functionality (Shadcn-inspired)
+document.addEventListener('DOMContentLoaded', function() {
+  // Find all checkboxes in the career forms
+  const checkboxContainers = document.querySelectorAll('.form_checkbox, .w-checkbox');
+  
+  checkboxContainers.forEach(function(container) {
+    const checkbox = container.querySelector('input[type="checkbox"]');
+    const checkboxIcon = container.querySelector('.form_checkbox-icon-2, .w-checkbox-input');
+    const label = container.querySelector('.form_checkbox-label, .w-form-label');
+    
+    if (!checkbox) return;
+    
+    // Make the entire container clickable
+    container.addEventListener('click', function(e) {
+      // Don't trigger if clicking directly on the input (it handles itself)
+      if (e.target === checkbox) return;
+      
+      // Prevent default to avoid double-toggle
+      e.preventDefault();
+      e.stopPropagation();
+      
+      // Toggle the checkbox
+      checkbox.checked = !checkbox.checked;
+      
+      // Trigger change event for form validation
+      const changeEvent = new Event('change', { bubbles: true });
+      checkbox.dispatchEvent(changeEvent);
+      
+      // Update visual state
+      updateCheckboxVisual(container, checkbox, checkboxIcon);
+    });
+    
+    // Also listen to the checkbox itself
+    checkbox.addEventListener('change', function() {
+      updateCheckboxVisual(container, checkbox, checkboxIcon);
+    });
+    
+    // Initialize visual state
+    updateCheckboxVisual(container, checkbox, checkboxIcon);
+  });
+  
+  function updateCheckboxVisual(container, checkbox, icon) {
+    if (!icon) return;
+    
+    if (checkbox.checked) {
+      container.classList.add('checked');
+      icon.classList.add('checked');
+      icon.setAttribute('data-checked', 'true');
+    } else {
+      container.classList.remove('checked');
+      icon.classList.remove('checked');
+      icon.setAttribute('data-checked', 'false');
+    }
+  }
+});
