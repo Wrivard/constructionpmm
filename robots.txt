@@ -23,7 +23,7 @@ Allow: /images/*.svg
 Allow: /images/*.webp
 
 # Sitemap location
-Sitemap: https://[DOMAIN]/sitemap.xml
+Sitemap: https://constructionpmm.com/sitemap.xml
 
 # Block AI training bots
 User-agent: GPTBot

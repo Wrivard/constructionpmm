@@ -5,7 +5,7 @@
   
   <!-- Homepage - Highest Priority -->
   <url>
-    <loc>https://[DOMAIN]/</loc>
+    <loc>https://constructionpmm.com/</loc>
     <lastmod>2026-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -13,35 +13,35 @@
   
   <!-- Main Pages - High Priority -->
   <url>
-    <loc>https://[DOMAIN]/contact.html</loc>
+    <loc>https://constructionpmm.com/contact.html</loc>
     <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
-    <loc>https://[DOMAIN]/entreprise.html</loc>
+    <loc>https://constructionpmm.com/entreprise.html</loc>
     <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://[DOMAIN]/expertise.html</loc>
+    <loc>https://constructionpmm.com/expertise.html</loc>
     <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://[DOMAIN]/projets.html</loc>
+    <loc>https://constructionpmm.com/projets.html</loc>
     <lastmod>2026-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
-    <loc>https://[DOMAIN]/carriere.html</loc>
+    <loc>https://constructionpmm.com/carriere.html</loc>
     <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -49,56 +49,56 @@
   
   <!-- Project Pages - High Priority -->
   <url>
-    <loc>https://[DOMAIN]/projets/bourdage.html</loc>
+    <loc>https://constructionpmm.com/projets/bourdage.html</loc>
     <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://[DOMAIN]/projets/custodio.html</loc>
+    <loc>https://constructionpmm.com/projets/custodio.html</loc>
     <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://[DOMAIN]/projets/de-champs.html</loc>
+    <loc>https://constructionpmm.com/projets/de-champs.html</loc>
     <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://[DOMAIN]/projets/duchesneau.html</loc>
+    <loc>https://constructionpmm.com/projets/duchesneau.html</loc>
     <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://[DOMAIN]/projets/goroshin.html</loc>
+    <loc>https://constructionpmm.com/projets/goroshin.html</loc>
     <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://[DOMAIN]/projets/hebert.html</loc>
+    <loc>https://constructionpmm.com/projets/hebert.html</loc>
     <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://[DOMAIN]/projets/laroussi.html</loc>
+    <loc>https://constructionpmm.com/projets/laroussi.html</loc>
     <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://[DOMAIN]/projets/verdun.html</loc>
+    <loc>https://constructionpmm.com/projets/verdun.html</loc>
     <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -106,7 +106,7 @@
   
   <!-- Legal Pages - Lower Priority -->
   <url>
-    <loc>https://[DOMAIN]/politique-de-cookie.html</loc>
+    <loc>https://constructionpmm.com/politique-de-cookie.html</loc>
     <lastmod>2026-01-21</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>

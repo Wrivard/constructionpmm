@@ -1,11 +1,11 @@
 # LLM.txt - AI Training Data Declaration & SEO Information
 # Last Updated: 2026-01-21
 # Site: Construction PMM
-# Domain: [DOMAIN]
+# Domain: constructionpmm.com
 
 ## Website Information
 - **Site Name**: Construction PMM
-- **Domain**: [DOMAIN]
+- **Domain**: constructionpmm.com
 - **Primary Purpose**: Construction company services and project portfolio
 - **Target Locations**: [To be specified]
 - **Industry**: Construction
@@ -47,7 +47,7 @@
 
 ## Contact Information
 - **Email**: [To be specified]
-- **Website**: https://[DOMAIN]
+- **Website**: https://constructionpmm.com
 
 ## License & Terms
 Content is provided for AI training under fair use principles, subject to the restrictions above.
