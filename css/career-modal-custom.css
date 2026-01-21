@@ -61,7 +61,7 @@
   display: flex !important;
   align-items: flex-start !important;
   cursor: pointer !important;
-  padding: 14px !important;
+  padding: 14px 14px 14px 18px !important;
   background: #2a2a2a !important;
   border-radius: 6px !important;
   transition: background 0.2s ease !important;
@@ -69,8 +69,9 @@
   width: 100% !important;
   max-width: 100% !important;
   box-sizing: border-box !important;
-  overflow: hidden !important;
+  overflow: visible !important;
   position: relative !important;
+  pointer-events: auto !important;
 }
 
 .form_checkbox:hover {
@@ -89,6 +90,8 @@
   flex-shrink: 0 !important;
   background: #1b1b1b !important;
   transition: all 0.2s ease !important;
+  pointer-events: none !important;
+  cursor: pointer !important;
 }
 
 .form_checkbox input:checked + .form_checkbox-icon-2 {
@@ -118,9 +121,11 @@
   word-break: break-word !important;
   max-width: calc(100% - 32px) !important;
   min-width: 0 !important;
-  overflow: hidden !important;
+  overflow: visible !important;
   white-space: normal !important;
   display: block !important;
+  cursor: pointer !important;
+  pointer-events: auto !important;
 }
 
 /* Force label span to respect width */
@@ -152,8 +157,17 @@ label[for*="Checkbox"] span {
   overflow-wrap: break-word !important;
   word-break: break-word !important;
   white-space: normal !important;
-  overflow: hidden !important;
+  overflow: visible !important;
   text-overflow: ellipsis !important;
+  cursor: pointer !important;
+}
+
+/* Ensure checkbox input is clickable */
+input[type="checkbox"],
+input[name*="Checkbox"],
+#Contact-1-Checkbox {
+  pointer-events: auto !important;
+  cursor: pointer !important;
 }
 
 /* Force container width constraints on Webflow elements */
@@ -168,8 +182,9 @@ label[for*="Checkbox"] span {
   margin-bottom: 24px !important;
   width: 100% !important;
   max-width: 100% !important;
-  overflow: hidden !important;
+  overflow: visible !important;
   box-sizing: border-box !important;
+  pointer-events: auto !important;
 }
 
 /* Submit Button - Inside Modal Only */
@@ -215,14 +230,14 @@ label[for*="Checkbox"] span {
   width: 100% !important;
   max-width: 100% !important;
   box-sizing: border-box !important;
-  overflow: hidden !important;
+  overflow: visible !important;
 }
 
 .contact-modal1_form {
   width: 100% !important;
   max-width: 100% !important;
   box-sizing: border-box !important;
-  overflow: hidden !important;
+  overflow: visible !important;
 }
 
 /* All form children should respect width */
@@ -235,7 +250,7 @@ label[for*="Checkbox"] span {
 /* Override any Webflow styles that might cause overflow */
 .contact-modal1_form .w-checkbox,
 .contact-modal1_form .form_checkbox {
-  contain: layout !important;
+  pointer-events: auto !important;
 }
 
 .contact-modal1_background-overlay {
