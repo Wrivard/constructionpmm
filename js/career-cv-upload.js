@@ -301,6 +301,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log('🎬 Starting success timeout actions...');
                 console.log('  - formElement:', formElement ? 'exists' : 'null');
                 console.log('  - successMessage:', successMessage ? 'exists' : 'null');
+                console.log('  - errorMessage:', errorMessage ? 'exists' : 'null');
+                
+                // Hide error message explicitly
+                if (errorMessage) {
+                  errorMessage.style.display = 'none';
+                  console.log('  - Error message hidden');
+                }
                 
                 formElement.style.display = 'none';
                 console.log('  - Form hidden');
@@ -338,6 +345,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if (submitButton) {
           const spinner = submitButton.querySelector('.submit-spinner');
           if (spinner) spinner.remove();
+        }
+        
+        // Hide success message and show error message
+        if (successMessage) {
+          successMessage.style.display = 'none';
         }
         
         const errorMsg = error?.message?.replace(/</g, '&lt;').replace(/>/g, '&gt;') || 'Une erreur est survenue.';
