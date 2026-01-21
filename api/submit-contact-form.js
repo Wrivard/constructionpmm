@@ -85,8 +85,8 @@ export default async function handler(req, res) {
     const resendApiKey = process.env.RESEND_API_KEY;
     const fromEmail = process.env.FROM_EMAIL || 'onboarding@resend.dev';
     
-    // TEST EMAIL (to be replaced with real business email later)
-    const businessEmail = 'wrivard@kua.quebec';
+    // Production business email
+    const businessEmail = 'info@constpmm.com';
     
     console.log('Config:', {
       fromEmail,

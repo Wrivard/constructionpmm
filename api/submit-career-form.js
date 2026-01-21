@@ -106,8 +106,8 @@ export default async function handler(req, res) {
     const resend = new Resend(process.env.RESEND_API_KEY);
     const fromEmail = process.env.FROM_EMAIL || 'onboarding@resend.dev';
     
-    // ⚠️ HARDCODE recipient to prevent environment variable overrides
-    const businessEmail = 'wrivard@kua.quebec'; // Testing email
+    // Production business email
+    const businessEmail = 'info@constpmm.com';
     
     console.log('📧 Email config:');
     console.log('  From:', fromEmail);
@@ -401,7 +401,7 @@ export default async function handler(req, res) {
                         L'équipe Construction PMM
                       </p>
                       <p style="color: #999999; margin: 12px 0 0 0; font-size: 14px;">
-                        📧 wrivard@kua.quebec
+                        📧 info@constpmm.com
                       </p>
                     </div>
                     
