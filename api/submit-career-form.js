@@ -1,5 +1,4 @@
-import { Resend } from 'resend';
-import formidable from 'formidable';
+// Dynamic imports for Vercel serverless functions
 import fs from 'fs';
 
 export const config = {
@@ -29,6 +28,9 @@ export default async function handler(req, res) {
     console.log('🚀 API /submit-career-form called');
     console.log('Method:', req.method);
     console.log('Content-Type:', req.headers['content-type']);
+    
+    // Dynamic import for formidable (required for Vercel)
+    const { default: formidable } = await import('formidable');
     
     // Parse form data with formidable
     const form = formidable({
@@ -103,6 +105,8 @@ export default async function handler(req, res) {
       throw new Error('RESEND_API_KEY environment variable missing');
     }
     
+    // Dynamic import for Resend (required for Vercel)
+    const { Resend } = await import('resend');
     const resend = new Resend(process.env.RESEND_API_KEY);
     const fromEmail = process.env.FROM_EMAIL || 'onboarding@resend.dev';
     
