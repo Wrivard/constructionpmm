@@ -1,10 +1,8 @@
-// Simple Contact Form Handler - Resend API
-// Uses custom email templates via Vercel serverless function
-
+// Simple Contact Form Handler - Formspree
 (function() {
   'use strict';
   
-  console.log('🚀 Resend API handler loading...');
+  console.log('🚀 Formspree handler loading...');
   
   // Wait for DOM to be ready
   function init() {
@@ -15,9 +13,9 @@
       return;
     }
     
-    console.log('✅ Contact form found, attaching Resend API handler');
+    console.log('✅ Contact form found, attaching Formspree handler');
     
-    // Remove any existing listeners by cloning
+    // Remove any existing listeners
     const newForm = form.cloneNode(true);
     form.parentNode.replaceChild(newForm, form);
     
@@ -35,34 +33,22 @@
       if (submitBtn) {
         submitBtn.disabled = true;
         submitBtn.value = 'Envoi...';
-        submitBtn.style.opacity = '0.6';
       }
       
       try {
         // Get form data
         const formData = new FormData(newForm);
         
-        const name = formData.get('Contact-11-Name');
-        const email = formData.get('Contact-11-Email');
-        const message = formData.get('Contact-11-Message');
-        
-        console.log('📤 Sending to Resend API...');
-        
-        // Send to Resend API
-        const response = await fetch('/api/submit-contact-form', {
+        // Send to Formspree
+        const response = await fetch('https://formspree.io/f/xwvvjbzd', {
           method: 'POST',
+          body: formData,
           headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            name: name,
-            email: email,
-            message: message,
-            acceptTerms: 'true'
-          })
+            'Accept': 'application/json'
+          }
         });
         
-        console.log('📥 Response received:', response.status, response.ok);
+        console.log('📥 Response:', response.status);
         
         if (response.ok) {
           // Success
@@ -71,7 +57,6 @@
           if (submitBtn) {
             submitBtn.value = '✓ Envoyé!';
             submitBtn.style.background = '#28a745';
-            submitBtn.style.opacity = '1';
           }
           
           // Hide form, show success message
@@ -81,10 +66,6 @@
             if (successMsg) {
               successMsg.style.display = 'block';
               successMsg.style.visibility = 'visible';
-              const successText = successMsg.querySelector('.success-text');
-              if (successText) {
-                successText.textContent = 'Merci ! Votre message a été envoyé avec succès.';
-              }
             }
           }, 1000);
           
@@ -100,22 +81,17 @@
         if (errorMsg) {
           errorMsg.style.display = 'block';
           errorMsg.style.visibility = 'visible';
-          const errorText = errorMsg.querySelector('.error-text');
-          if (errorText) {
-            errorText.textContent = 'Erreur lors de l\'envoi. Veuillez réessayer.';
-          }
         }
         
         // Reset button
         if (submitBtn) {
           submitBtn.disabled = false;
           submitBtn.value = originalValue;
-          submitBtn.style.opacity = '1';
         }
       }
     });
     
-    console.log('✅ Resend API handler ready!');
+    console.log('✅ Formspree handler ready!');
   }
   
   // Initialize when DOM is ready
@@ -126,5 +102,3 @@
   }
   
 })();
-
-console.log('📦 Resend API handler script loaded');
