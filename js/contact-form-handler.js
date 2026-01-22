@@ -1,5 +1,11 @@
 // Contact Form Handler
 // Handles form submission with custom validation and animations
+// 
+// SETUP FORMSPREE:
+// 1. Go to https://formspree.io/ and sign up (free)
+// 2. Create a new form and get your Form ID
+// 3. Replace 'YOUR_FORM_ID' in line ~167 with your actual Form ID
+// Example: https://formspree.io/f/xyzabcd123
 
 // Hide all success/error messages on page load
 document.addEventListener('DOMContentLoaded', function() {
@@ -151,37 +157,40 @@ async function handleContactFormSubmit(formElement) {
     
     console.log('✅ All validation passed');
     
-    // Prepare JSON payload
-    const payload = {
-      name,
-      email,
-      message,
-      acceptTerms
-    };
+    // Prepare form data for Formspree
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('message', message);
+    formData.append('_subject', `Nouveau message de ${name}`);
     
-    console.log('📤 Sending to API...');
+    console.log('📤 Sending to Formspree...');
     
-    // Submit to API
-    const response = await fetch('/api/submit-contact-form', {
+    // Submit to Formspree
+    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xwvvjbzd';
+    
+    const response = await fetch(FORMSPREE_ENDPOINT, {
       method: 'POST',
+      body: formData,
       headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload)
+        'Accept': 'application/json'
+      }
     });
     
-    console.log('📥 API response received:', {
+    console.log('📥 Formspree response received:', {
       status: response.status,
       statusText: response.statusText,
       ok: response.ok
     });
     
+    if (!response.ok) {
+      const result = await response.json();
+      console.error('Formspree error:', result);
+      throw new Error('Une erreur est survenue lors de l\'envoi du message.');
+    }
+    
     const result = await response.json();
     console.log('Response data:', result);
-    
-    if (!response.ok) {
-      throw new Error(result.message || 'Une erreur est survenue.');
-    }
     
     console.log('✅ Form submission successful!');
     console.log('🎉 Starting success animation...');
