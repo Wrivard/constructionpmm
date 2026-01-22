@@ -4,8 +4,6 @@ window.selectedJobs = {};
 
 // Function to hide all success/error messages
 function hideAllMessages() {
-  console.log('🔒 Hiding all success/error messages...');
-  
   // Hide all success messages
   const successMessages = document.querySelectorAll('.w-form-done');
   successMessages.forEach(msg => {
@@ -19,8 +17,6 @@ function hideAllMessages() {
     msg.style.setProperty('display', 'none', 'important');
     msg.style.visibility = 'hidden';
   });
-  
-  console.log(`✅ Hidden ${successMessages.length} success messages and ${errorMessages.length} error messages`);
 }
 
 // Hide all success/error messages on page load
@@ -32,14 +28,11 @@ document.addEventListener('DOMContentLoaded', function() {
   
   modalTriggers.forEach(trigger => {
     trigger.addEventListener('click', function() {
-      console.log('🚪 Modal opening - hiding messages...');
       // Hide messages immediately when modal opens
       setTimeout(hideAllMessages, 0);
       setTimeout(hideAllMessages, 100); // Double-check after animation
     });
   });
-  
-  console.log(`📝 Added event listeners to ${modalTriggers.length} modal triggers`);
 });
 
 function addCV(formNumber) {
@@ -226,13 +219,6 @@ document.addEventListener('DOMContentLoaded', function() {
       const successMessage = formParent ? formParent.querySelector('.w-form-done') : null;
       const errorMessage = formParent ? formParent.querySelector('.w-form-fail') : null;
       
-      console.log('📋 Form elements:', {
-        formElement: formElement ? 'exists' : 'null',
-        formParent: formParent ? 'exists' : 'null',
-        successMessage: successMessage ? 'exists' : 'null',
-        errorMessage: errorMessage ? 'exists' : 'null'
-      });
-      
       // Hide messages immediately and forcefully
       if (successMessage) {
         successMessage.style.setProperty('display', 'none', 'important');
@@ -294,9 +280,6 @@ document.addEventListener('DOMContentLoaded', function() {
           body: formData
         });
         
-        console.log('📡 Response status:', response.status);
-        console.log('📡 Response ok:', response.ok);
-        
         if (response.status === 413) {
           throw new Error('Le fichier CV est trop volumineux. Maximum 5MB.');
         }
@@ -304,9 +287,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let result;
         try {
           const responseText = await response.text();
-          console.log('📡 Response text:', responseText);
           result = responseText ? JSON.parse(responseText) : null;
-          console.log('📡 Parsed result:', result);
         } catch (parseError) {
           console.error('❌ Parse error:', parseError);
           if (!response.ok) {
@@ -326,39 +307,27 @@ document.addEventListener('DOMContentLoaded', function() {
           throw new Error(result?.message || 'Erreur lors de l\'envoi');
         }
         
-        console.log('✅ Form submission successful!');
-        
         // Success animation
         try {
           if (submitButton) {
-            console.log('🎨 Starting success animation...');
             const spinner = submitButton.querySelector('.submit-spinner');
             if (spinner) {
               spinner.remove();
-              console.log('  - Spinner removed');
             }
             
             submitButton.value = '✓ Envoyé !';
             submitButton.style.background = '#28a745';
             submitButton.style.animation = 'successPulse 0.6s ease';
-            console.log('  - Button styled for success');
             
             setTimeout(() => {
               try {
-                console.log('🎬 Starting success timeout actions...');
-                console.log('  - formElement:', formElement ? 'exists' : 'null');
-                console.log('  - successMessage:', successMessage ? 'exists' : 'null');
-                console.log('  - errorMessage:', errorMessage ? 'exists' : 'null');
-                
                 // Hide error message explicitly
                 if (errorMessage) {
                   errorMessage.style.setProperty('display', 'none', 'important');
                   errorMessage.style.visibility = 'hidden';
-                  console.log('  - Error message hidden');
                 }
                 
                 formElement.style.display = 'none';
-                console.log('  - Form hidden');
                 
                 if (successMessage) {
                   successMessage.style.setProperty('display', 'block', 'important');
@@ -366,7 +335,6 @@ document.addEventListener('DOMContentLoaded', function() {
                   const successText = successMessage.querySelector('.success-text');
                   if (successText) {
                     successText.textContent = 'Merci ! Votre candidature a été reçue avec succès.';
-                    console.log('  - Success message displayed');
                   }
                 } else {
                   console.warn('⚠️ Success message element not found!');
@@ -376,8 +344,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 delete window.careerCVFiles[formNumber];
                 delete window.selectedJobs[formNumber];
                 updateCVDisplay(formNumber);
-                console.log('  - Form reset and cleaned up');
-                console.log('✅ Success animation complete!');
               } catch (timeoutError) {
                 console.error('❌ Error in success timeout:', timeoutError);
                 console.error('Stack:', timeoutError.stack);

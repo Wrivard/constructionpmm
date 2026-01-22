@@ -25,10 +25,6 @@ export default async function handler(req, res) {
   }
 
   try {
-    console.log('🚀 API /submit-career-form called');
-    console.log('Method:', req.method);
-    console.log('Content-Type:', req.headers['content-type']);
-    
     // Dynamic import for formidable (required for Vercel)
     const { default: formidable } = await import('formidable');
     
@@ -42,11 +38,7 @@ export default async function handler(req, res) {
 
     let fields, files;
     try {
-      console.log('📝 Parsing form data...');
       [fields, files] = await form.parse(req);
-      console.log('✅ Form parsed successfully');
-      console.log('Fields:', Object.keys(fields));
-      console.log('Files:', Object.keys(files));
     } catch (parseError) {
       console.error('❌ Parse error:', parseError);
       // Handle file size errors from formidable
@@ -67,13 +59,6 @@ export default async function handler(req, res) {
     const message = Array.isArray(fields['Contact-1-Message']) ? fields['Contact-1-Message'][0] : fields['Contact-1-Message'];
     const jobTitle = Array.isArray(fields['Job-Title']) ? fields['Job-Title'][0] : fields['Job-Title'];
     
-    console.log('📋 Extracted fields:');
-    console.log('  Name:', name);
-    console.log('  Phone:', phone);
-    console.log('  Email:', email);
-    console.log('  Job Title:', jobTitle);
-    console.log('  Message:', message ? `${message.substring(0, 50)}...` : 'No message');
-    
     // Extract CV file
     let cvFile = files['Contact-1-CV'] || null;
     
@@ -82,24 +67,15 @@ export default async function handler(req, res) {
       cvFile = cvFile[0];
     }
     
-    console.log('📎 CV File:', cvFile ? cvFile.originalFilename : 'No CV');
-    
     // Validate required fields
     if (!name || !phone || !email) {
-      console.log('❌ Validation failed: missing required fields');
       return res.status(400).json({
         success: false,
         message: 'Tous les champs obligatoires doivent être remplis.'
       });
     }
-    
-    console.log('✅ Validation passed');
 
     // Initialize Resend
-    console.log('🔑 Checking environment variables...');
-    console.log('  RESEND_API_KEY:', process.env.RESEND_API_KEY ? '✓ Set' : '❌ Missing');
-    console.log('  FROM_EMAIL:', process.env.FROM_EMAIL || 'Using default');
-    
     if (!process.env.RESEND_API_KEY) {
       console.error('❌ RESEND_API_KEY is missing!');
       throw new Error('RESEND_API_KEY environment variable missing');
@@ -112,11 +88,6 @@ export default async function handler(req, res) {
     
     // Production business email
     const businessEmail = 'info@constpmm.com';
-    
-    console.log('📧 Email config:');
-    console.log('  From:', fromEmail);
-    console.log('  To (business):', businessEmail);
-    console.log('  To (candidate):', email);
 
     // Prepare attachments
     const attachments = [];
@@ -138,8 +109,6 @@ export default async function handler(req, res) {
           content: fileBuffer,
           contentType: cvFile.mimetype || 'application/pdf'
         });
-        
-        console.log('📎 CV attachment prepared:', cleanFilename);
       } catch (fileError) {
         console.error('Error reading CV file:', fileError);
       }
@@ -282,13 +251,8 @@ export default async function handler(req, res) {
     // Add CV attachment if available
     if (attachments.length > 0) {
       emailData.attachments = attachments;
-      console.log(`📎 ${attachments.length} attachment(s) added to email`);
     }
 
-    console.log('📧 Sending business email...');
-    console.log('  To:', businessEmail);
-    console.log('  Subject:', emailData.subject);
-    
     const { data, error } = await resend.emails.send(emailData);
 
     if (error) {
@@ -299,15 +263,11 @@ export default async function handler(req, res) {
         message: 'Erreur lors de l\'envoi de l\'email. Veuillez réessayer plus tard.'
       });
     }
-    
-    console.log('✅ Business email sent successfully');
-    console.log('Email ID:', data?.id);
 
     // Clean up temporary file
     if (cvFile && cvFile.filepath) {
       try {
         fs.unlinkSync(cvFile.filepath);
-        console.log('🗑️ Temporary CV file cleaned up');
       } catch (cleanupError) {
         console.error('Error cleaning up CV file:', cleanupError);
       }
@@ -438,10 +398,6 @@ export default async function handler(req, res) {
         ? `✓ Candidature reçue - ${jobTitle} | Construction PMM`
         : `✓ Candidature reçue | Construction PMM`;
       
-      console.log('📧 Sending confirmation email...');
-      console.log('  To:', email);
-      console.log('  Subject:', confirmationSubject);
-      
       const confirmResult = await resend.emails.send({
         from: fromEmail,
         to: email,
@@ -452,16 +408,10 @@ export default async function handler(req, res) {
       
       if (confirmResult.error) {
         console.warn('⚠️ Confirmation email error:', confirmResult.error);
-      } else {
-        console.log('✅ Confirmation email sent successfully');
-        console.log('Email ID:', confirmResult.data?.id);
       }
     } catch (confirmationError) {
       console.warn('⚠️ Confirmation email failed:', confirmationError);
     }
-
-    console.log('🎉 Career form submission completed successfully!');
-    console.log('='.repeat(50));
     
     res.status(200).json({
       success: true,

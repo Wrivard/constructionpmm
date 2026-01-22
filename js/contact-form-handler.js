@@ -4,8 +4,6 @@
 (function() {
   'use strict';
   
-  console.log('🚀 Resend API handler loading...');
-  
   // Wait for DOM to be ready
   function init() {
     const form = document.querySelector('#wf-form-Contact-11-Form');
@@ -15,8 +13,6 @@
       return;
     }
     
-    console.log('✅ Contact form found, attaching Resend API handler');
-    
     // Remove any existing listeners by cloning
     const newForm = form.cloneNode(true);
     form.parentNode.replaceChild(newForm, form);
@@ -25,8 +21,6 @@
     newForm.addEventListener('submit', async function(e) {
       e.preventDefault();
       e.stopPropagation();
-      
-      console.log('📝 Form submitted, processing...');
       
       const submitBtn = newForm.querySelector('input[type="submit"]');
       const originalValue = submitBtn ? submitBtn.value : '';
@@ -46,8 +40,6 @@
         const email = formData.get('Contact-11-Email');
         const message = formData.get('Contact-11-Message');
         
-        console.log('📤 Sending to Resend API...');
-        
         // Send to Resend API
         const response = await fetch('/api/submit-contact-form', {
           method: 'POST',
@@ -62,12 +54,8 @@
           })
         });
         
-        console.log('📥 Response received:', response.status, response.ok);
-        
         if (response.ok) {
           // Success
-          console.log('✅ Form submitted successfully!');
-          
           if (submitBtn) {
             submitBtn.value = '✓ Envoyé!';
             submitBtn.style.background = '#28a745';
@@ -114,8 +102,6 @@
         }
       }
     });
-    
-    console.log('✅ Resend API handler ready!');
   }
   
   // Initialize when DOM is ready
@@ -126,5 +112,3 @@
   }
   
 })();
-
-console.log('📦 Resend API handler script loaded');

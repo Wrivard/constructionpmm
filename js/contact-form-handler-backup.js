@@ -2,8 +2,6 @@
 (function() {
   'use strict';
   
-  console.log('🚀 Formspree handler loading...');
-  
   // Wait for DOM to be ready
   function init() {
     const form = document.querySelector('#wf-form-Contact-11-Form');
@@ -13,8 +11,6 @@
       return;
     }
     
-    console.log('✅ Contact form found, attaching Formspree handler');
-    
     // Remove any existing listeners
     const newForm = form.cloneNode(true);
     form.parentNode.replaceChild(newForm, form);
@@ -23,8 +19,6 @@
     newForm.addEventListener('submit', async function(e) {
       e.preventDefault();
       e.stopPropagation();
-      
-      console.log('📝 Form submitted, processing...');
       
       const submitBtn = newForm.querySelector('input[type="submit"]');
       const originalValue = submitBtn ? submitBtn.value : '';
@@ -48,12 +42,8 @@
           }
         });
         
-        console.log('📥 Response:', response.status);
-        
         if (response.ok) {
           // Success
-          console.log('✅ Form submitted successfully!');
-          
           if (submitBtn) {
             submitBtn.value = '✓ Envoyé!';
             submitBtn.style.background = '#28a745';
@@ -90,8 +80,6 @@
         }
       }
     });
-    
-    console.log('✅ Formspree handler ready!');
   }
   
   // Initialize when DOM is ready

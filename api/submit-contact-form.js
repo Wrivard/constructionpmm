@@ -34,23 +34,11 @@ export default async function handler(req, res) {
     });
   }
 
-  console.log('🚀 Contact form submission started');
-  console.log('='.repeat(50));
-
   try {
     // Parse form data
-    console.log('📋 Parsing form data...');
     const { name, email, message, acceptTerms } = req.body;
-    
-    console.log('Received data:', {
-      name: name || 'N/A',
-      email: email || 'N/A',
-      messageLength: message ? message.length : 0,
-      acceptTerms: acceptTerms || 'false'
-    });
 
     // Validation
-    console.log('✅ Validating fields...');
     if (!name || !email || !message) {
       console.error('❌ Missing required fields');
       return res.status(400).json({
@@ -77,22 +65,13 @@ export default async function handler(req, res) {
       });
     }
 
-    console.log('✅ All fields validated successfully');
-
     // Initialize Resend
-    console.log('📧 Initializing Resend...');
     const { Resend } = await import('resend');
     const resendApiKey = process.env.RESEND_API_KEY;
     const fromEmail = process.env.FROM_EMAIL || 'onboarding@resend.dev';
     
     // Production business email
     const businessEmail = 'info@constpmm.com';
-    
-    console.log('Config:', {
-      fromEmail,
-      businessEmail,
-      hasApiKey: !!resendApiKey
-    });
 
     if (!resendApiKey) {
       console.error('❌ RESEND_API_KEY not found in environment variables');
@@ -103,13 +82,10 @@ export default async function handler(req, res) {
     }
 
     const resend = new Resend(resendApiKey);
-    console.log('✅ Resend initialized');
 
     // =====================================================
     // EMAIL 1: Business Notification (to owner)
     // =====================================================
-    console.log('📨 Preparing business notification email...');
-    
     const businessEmailContent = `
       <!DOCTYPE html>
       <html>
@@ -221,8 +197,6 @@ ${message}
     // =====================================================
     // EMAIL 2: Confirmation to User
     // =====================================================
-    console.log('📨 Preparing user confirmation email...');
-    
     const confirmationContent = `
       <!DOCTYPE html>
       <html>
@@ -353,10 +327,6 @@ ${message.length > 150 ? message.substring(0, 150) + '...' : message}
       replyTo: email
     };
 
-    console.log('📧 Sending business email...');
-    console.log('  To:', businessEmail);
-    console.log('  Subject:', emailData.subject);
-    
     const { data, error } = await resend.emails.send(emailData);
 
     if (error) {
@@ -367,18 +337,11 @@ ${message.length > 150 ? message.substring(0, 150) + '...' : message}
       });
     }
 
-    console.log('✅ Business email sent successfully');
-    console.log('Email ID:', data?.id);
-
     // =====================================================
     // Send Confirmation Email (don't fail if this fails)
     // =====================================================
     try {
       const confirmationSubject = '✓ Message reçu | Construction PMM';
-      
-      console.log('📧 Sending confirmation email...');
-      console.log('  To:', email);
-      console.log('  Subject:', confirmationSubject);
       
       const confirmResult = await resend.emails.send({
         from: fromEmail,
@@ -390,16 +353,10 @@ ${message.length > 150 ? message.substring(0, 150) + '...' : message}
       
       if (confirmResult.error) {
         console.warn('⚠️ Confirmation email error:', confirmResult.error);
-      } else {
-        console.log('✅ Confirmation email sent successfully');
-        console.log('Email ID:', confirmResult.data?.id);
       }
     } catch (confirmationError) {
       console.warn('⚠️ Confirmation email failed:', confirmationError);
     }
-
-    console.log('🎉 Contact form submission completed successfully!');
-    console.log('='.repeat(50));
     
     res.status(200).json({
       success: true,
