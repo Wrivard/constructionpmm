@@ -58,6 +58,23 @@ export default async function handler(req, res) {
     const email = Array.isArray(fields['Contact-1-Email']) ? fields['Contact-1-Email'][0] : fields['Contact-1-Email'];
     const message = Array.isArray(fields['Contact-1-Message']) ? fields['Contact-1-Message'][0] : fields['Contact-1-Message'];
     const jobTitle = Array.isArray(fields['Job-Title']) ? fields['Job-Title'][0] : fields['Job-Title'];
+    const honeypot = Array.isArray(fields['website_url']) ? fields['website_url'][0] : fields['website_url'];
+    const formLoadedAt = Array.isArray(fields['_form_loaded_at']) ? fields['_form_loaded_at'][0] : fields['_form_loaded_at'];
+
+    // Anti-spam: honeypot check (bots fill hidden fields, humans don't)
+    if (honeypot) {
+      console.warn('🤖 Bot detected via honeypot');
+      return res.status(200).json({ success: true, message: 'Candidature envoyée avec succès!' });
+    }
+
+    // Anti-spam: time-based check (bots submit in < 3 seconds)
+    if (formLoadedAt) {
+      const elapsed = Date.now() - parseInt(formLoadedAt, 10);
+      if (elapsed < 3000) {
+        console.warn('🤖 Bot detected via timing (' + elapsed + 'ms)');
+        return res.status(200).json({ success: true, message: 'Candidature envoyée avec succès!' });
+      }
+    }
     
     // Extract CV file
     let cvFile = files['Contact-1-CV'] || null;

@@ -35,10 +35,23 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Parse form data
-    const { name, email, message, acceptTerms } = req.body;
+    const { name, email, message, acceptTerms, _hp, _t } = req.body;
 
-    // Validation
+    // Anti-spam: honeypot check (bots fill hidden fields, humans don't)
+    if (_hp) {
+      console.warn('🤖 Bot detected via honeypot');
+      return res.status(200).json({ success: true, message: 'Message envoyé avec succès!' });
+    }
+
+    // Anti-spam: time-based check (bots submit in < 3 seconds)
+    if (_t) {
+      const elapsed = Date.now() - parseInt(_t, 10);
+      if (elapsed < 3000) {
+        console.warn('🤖 Bot detected via timing (' + elapsed + 'ms)');
+        return res.status(200).json({ success: true, message: 'Message envoyé avec succès!' });
+      }
+    }
+
     if (!name || !email || !message) {
       console.error('❌ Missing required fields');
       return res.status(400).json({
@@ -55,7 +68,6 @@ export default async function handler(req, res) {
       });
     }
 
-    // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       console.error('❌ Invalid email format');

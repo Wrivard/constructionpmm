@@ -151,9 +151,14 @@ function updateCVDisplay(formNumber) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  // Initialize CV displays
+  // Initialize CV displays and set anti-bot timestamps
   for (let i = 1; i <= 3; i++) {
     updateCVDisplay(i);
+    var careerForm = document.getElementById('wf-form-Contact-1-Form-' + i);
+    if (careerForm) {
+      var loadedAtField = careerForm.querySelector('input[name="_form_loaded_at"]');
+      if (loadedAtField) loadedAtField.value = Date.now().toString();
+    }
   }
   
   // Add hover effect to CV upload buttons

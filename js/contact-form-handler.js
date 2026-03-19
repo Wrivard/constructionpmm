@@ -12,6 +12,12 @@
       console.warn('⚠️ Contact form not found');
       return;
     }
+
+    // Set timestamp when form becomes available (anti-bot: time-based detection)
+    var loadedAtField = form.querySelector('input[name="_form_loaded_at"]');
+    if (loadedAtField) {
+      loadedAtField.value = Date.now().toString();
+    }
     
     // Remove any existing listeners by cloning
     const newForm = form.cloneNode(true);
@@ -39,6 +45,8 @@
         const name = formData.get('Contact-11-Name');
         const email = formData.get('Contact-11-Email');
         const message = formData.get('Contact-11-Message');
+        const honeypot = formData.get('website_url') || '';
+        const formLoadedAt = formData.get('_form_loaded_at') || '';
         
         // Send to Resend API
         const response = await fetch('/api/submit-contact-form', {
@@ -50,7 +58,9 @@
             name: name,
             email: email,
             message: message,
-            acceptTerms: 'true'
+            acceptTerms: 'true',
+            _hp: honeypot,
+            _t: formLoadedAt
           })
         });
         
