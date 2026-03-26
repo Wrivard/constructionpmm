@@ -99,6 +99,79 @@
   window.addContact11Image = addContact11Image;
   window.removeContact11Image = removeContact11Image;
 
+  /**
+   * Format nord-américain (10 chiffres), usage courant au Québec : (450) 272-8140
+   * Accepte une entrée avec indicatif pays 1 optionnel.
+   */
+  function formatNaPhoneQuebec(input) {
+    var el = input;
+    var start = el.selectionStart;
+    var before = el.value;
+    var digitsBefore = before.slice(0, start).replace(/\D/g, '').length;
+
+    var d = before.replace(/\D/g, '');
+    if (d.length >= 11 && d.charAt(0) === '1') {
+      d = d.slice(1);
+    }
+    d = d.slice(0, 10);
+
+    var f = '';
+    if (d.length > 0) {
+      f = '(' + d.slice(0, Math.min(3, d.length));
+    }
+    if (d.length >= 4) {
+      f += ') ' + d.slice(3, Math.min(6, d.length));
+    }
+    if (d.length >= 7) {
+      f += '-' + d.slice(6, 10);
+    }
+
+    el.value = f;
+
+    var newPos = 0;
+    if (digitsBefore <= 0) {
+      newPos = 0;
+    } else if (digitsBefore >= d.length) {
+      newPos = f.length;
+    } else {
+      var count = 0;
+      for (var i = 0; i < f.length; i++) {
+        if (/\d/.test(f[i])) {
+          count++;
+          newPos = i + 1;
+          if (count >= digitsBefore) {
+            break;
+          }
+        }
+      }
+    }
+
+    try {
+      el.setSelectionRange(newPos, newPos);
+    } catch (e) {
+      /* ignore */
+    }
+  }
+
+  function bindQuebecPhoneFormatting(formEl) {
+    var phoneInput = formEl.querySelector('#Contact-11-Phone');
+    if (!phoneInput) return;
+
+    phoneInput.setAttribute('maxlength', '14');
+    phoneInput.setAttribute('inputmode', 'tel');
+    phoneInput.setAttribute('autocomplete', 'tel');
+
+    var run = function() {
+      formatNaPhoneQuebec(phoneInput);
+    };
+
+    phoneInput.addEventListener('input', run);
+    phoneInput.addEventListener('blur', run);
+    phoneInput.addEventListener('paste', function() {
+      window.setTimeout(run, 0);
+    });
+  }
+
   function init() {
     var form = document.querySelector('#wf-form-Contact-11-Form');
     if (!form) {
@@ -113,6 +186,8 @@
 
     var newForm = form.cloneNode(true);
     form.parentNode.replaceChild(newForm, form);
+
+    bindQuebecPhoneFormatting(newForm);
 
     updateContact11ImageDisplay();
 
