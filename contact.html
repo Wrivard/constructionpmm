@@ -1828,11 +1828,33 @@ margin: 0rem !important;
               <div class="contact11_component">
                 <div class="w-layout-grid contact11_content">
                   <div class="contact11_form-block w-form">
-                    <form id="wf-form-Contact-11-Form" name="wf-form-Contact-11-Form" data-name="Contact 11 Form" method="post" class="contact11_form" data-wf-page-id="6951e94b41a35e17f8c0ca77" data-wf-element-id="0e614f78-463b-d816-547b-becf8aa7daa4">
+                    <form id="wf-form-Contact-11-Form" name="wf-form-Contact-11-Form" data-name="Contact 11 Form" method="post" enctype="multipart/form-data" class="contact11_form" data-wf-page-id="6951e94b41a35e17f8c0ca77" data-wf-element-id="0e614f78-463b-d816-547b-becf8aa7daa4">
                       <div style="position:absolute;left:-9999px;top:-9999px;height:0;width:0;overflow:hidden;" aria-hidden="true" tabindex="-1"><label for="website-url-c11">Website</label><input type="text" name="website_url" id="website-url-c11" autocomplete="off" tabindex="-1" value=""></div>
                       <input type="hidden" name="_form_loaded_at" value="">
                       <div class="form_field-wrapper"><label for="Contact-11-Name" class="form_field-label">Nom</label><input class="form_input w-input" maxlength="256" name="Contact-11-Name" data-name="Contact 11 Name" placeholder="" type="text" id="Contact-11-Name" required=""></div>
                       <div class="form_field-wrapper"><label for="Contact-11-Email" class="form_field-label">Email</label><input class="form_input w-input" maxlength="256" name="Contact-11-Email" data-name="Contact 11 Email" placeholder="" type="email" id="Contact-11-Email" required=""></div>
+                      <div class="form_field-wrapper"><label for="Contact-11-Phone" class="form_field-label">Téléphone</label><input class="form_input w-input" maxlength="40" name="Contact-11-Phone" data-name="Contact 11 Phone" placeholder="(450) 000-0000" type="tel" id="Contact-11-Phone" required=""></div>
+                      <div class="form_field-wrapper"><label for="Contact-11-Address" class="form_field-label">Adresse du chantier</label><input class="form_input w-input" maxlength="500" name="Contact-11-Address" data-name="Contact 11 Address" placeholder="Numéro, rue, ville, code postal" type="text" id="Contact-11-Address" required=""></div>
+                      <div class="form_field-wrapper">
+                        <div class="form_field-label">Disposez-vous déjà de plans pour votre projet&nbsp;?</div>
+                        <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px;">
+                          <label class="text-size-small" style="display:flex;align-items:center;gap:8px;cursor:pointer;"><input type="radio" name="Contact-11-Plans-Status" value="yes" required=""> Oui</label>
+                          <label class="text-size-small" style="display:flex;align-items:center;gap:8px;cursor:pointer;"><input type="radio" name="Contact-11-Plans-Status" value="no"> Non</label>
+                        </div>
+                      </div>
+                      <div class="form_field-wrapper">
+                        <label class="form_field-label">Plans ou photos du projet (optionnel)</label>
+                        <p class="text-size-small" style="opacity:0.85;margin:0 0 12px 0;">JPG, PNG ou GIF — max 4&nbsp;Mo par image — jusqu’à 5 images — total max ~4,5&nbsp;Mo (limite d’envoi)</p>
+                        <div id="contact11-image-upload-box" style="border:2px dashed rgba(255,255,255,0.25);padding:16px;border-radius:8px;background:rgba(0,0,0,0.15);">
+                          <div id="contact11-add-image-buttons" style="margin-bottom:8px;">
+                            <button type="button" class="contact11-add-image-btn" style="background:#dc3545;color:#fff;border:none;padding:10px 18px;border-radius:5px;cursor:pointer;font-size:14px;">+ Ajouter une image</button>
+                          </div>
+                          <div id="contact11-selected-images" style="display:none;">
+                            <div class="text-size-small" style="font-weight:600;margin-bottom:8px;">Images sélectionnées</div>
+                            <div id="contact11-image-list"></div>
+                          </div>
+                        </div>
+                      </div>
                       <div class="form_field-wrapper"><label for="Contact-11-Message" class="form_field-label">Message</label><textarea id="Contact-11-Message" name="Contact-11-Message" maxlength="5000" data-name="Contact 11 Message" placeholder="Parlez-nous de votre projet..." required="" class="form_input is-text-area w-input"></textarea></div>
                       <div class="margin-bottom margin-xsmall"><label id="Contact-11-Checkbox" class="w-checkbox form_checkbox">
                           <div class="w-checkbox-input w-checkbox-input--inputType-custom form_checkbox-icon"></div><input type="checkbox" name="Contact-11-Checkbox" id="Contact 11 Checkbox" data-name="Contact 11 Checkbox" required="" style="opacity:0;position:absolute;z-index:-1"><span for="Contact-11-Checkbox" class="form_checkbox-label text-size-small w-form-label">J&#x27;accepte les conditions générales</span>

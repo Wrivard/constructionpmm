@@ -104,7 +104,7 @@ export default async function handler(req, res) {
     const fromEmail = process.env.FROM_EMAIL || 'onboarding@resend.dev';
     
     // Production business email
-    const businessEmail = 'info@constpmm.com';
+    const businessEmail = process.env.RECIPIENT_EMAIL || 'info@constpmm.com';
 
     // Prepare attachments
     const attachments = [];

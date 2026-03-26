@@ -1,110 +1,224 @@
-// Simple Contact Form Handler - Resend API
-// Uses custom email templates via Vercel serverless function
-
+// Contact / demande de soumission — Resend + multipart (téléphone, adresse, plans, images)
 (function() {
   'use strict';
-  
-  // Wait for DOM to be ready
+
+  var MAX_IMAGES = 5;
+  var MAX_FILE_SIZE = 4 * 1024 * 1024;
+  var MAX_TOTAL_SIZE = 4.5 * 1024 * 1024;
+  var IMAGE_FIELD = 'Contact-11-Image[]';
+
+  window.contact11PlanImages = window.contact11PlanImages || [];
+
+  function currentTotalBytes() {
+    return window.contact11PlanImages.reduce(function(sum, f) {
+      return sum + (f && f.size ? f.size : 0);
+    }, 0);
+  }
+
+  function updateContact11ImageDisplay() {
+    var wrap = document.getElementById('contact11-selected-images');
+    var list = document.getElementById('contact11-image-list');
+    var btnWrap = document.getElementById('contact11-add-image-buttons');
+    if (!wrap || !list || !btnWrap) return;
+
+    if (window.contact11PlanImages.length === 0) {
+      wrap.style.display = 'none';
+    } else {
+      wrap.style.display = 'block';
+      list.innerHTML = window.contact11PlanImages.map(function(file, index) {
+        var mb = (file.size / 1024 / 1024).toFixed(2);
+        return (
+          '<div style="display:flex;align-items:center;justify-content:space-between;padding:8px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:4px;margin-bottom:6px;">' +
+          '<span style="flex:1;font-size:14px;word-break:break-all;">' + file.name + ' (' + mb + ' Mo)</span>' +
+          '<button type="button" data-remove-index="' + index + '" class="contact11-remove-image" style="background:#6c757d;color:#fff;border:none;border-radius:50%;width:28px;height:28px;cursor:pointer;font-size:16px;line-height:1;margin-left:8px;">×</button>' +
+          '</div>'
+        );
+      }).join('');
+      list.querySelectorAll('.contact11-remove-image').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var i = parseInt(btn.getAttribute('data-remove-index'), 10);
+          removeContact11Image(i);
+        });
+      });
+    }
+
+    var remaining = MAX_IMAGES - window.contact11PlanImages.length;
+    if (remaining > 0) {
+      btnWrap.innerHTML = '<button type="button" class="contact11-add-image-btn" style="background:#dc3545;color:#fff;border:none;padding:10px 18px;border-radius:5px;cursor:pointer;font-size:14px;">+ Ajouter une image</button>';
+      var nb = btnWrap.querySelector('.contact11-add-image-btn');
+      if (nb) nb.addEventListener('click', addContact11Image);
+    } else {
+      btnWrap.innerHTML = '<span class="text-size-small" style="opacity:0.8;font-style:italic;">Nombre maximum d’images atteint</span>';
+    }
+  }
+
+  function addContact11Image() {
+    if (window.contact11PlanImages.length >= MAX_IMAGES) {
+      window.alert('Maximum ' + MAX_IMAGES + ' images autorisées.');
+      return;
+    }
+
+    var input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/jpeg,image/png,image/gif,image/webp';
+    input.style.display = 'none';
+
+    input.onchange = function(e) {
+      var file = e.target.files && e.target.files[0];
+      if (!file) return;
+
+      if (!file.type || file.type.indexOf('image/') !== 0) {
+        window.alert('Veuillez choisir un fichier image (JPG, PNG, GIF ou WebP).');
+        return;
+      }
+
+      if (file.size > MAX_FILE_SIZE) {
+        window.alert('Le fichier est trop volumineux. Maximum 4 Mo par image.');
+        return;
+      }
+
+      if (currentTotalBytes() + file.size > MAX_TOTAL_SIZE) {
+        window.alert('La taille totale des images est trop importante. Maximum ~4,5 Mo au total (limite d’envoi). Réduisez la taille ou le nombre d’images.');
+        return;
+      }
+
+      window.contact11PlanImages.push(file);
+      updateContact11ImageDisplay();
+    };
+
+    document.body.appendChild(input);
+    input.click();
+    document.body.removeChild(input);
+  }
+
+  function removeContact11Image(index) {
+    window.contact11PlanImages.splice(index, 1);
+    updateContact11ImageDisplay();
+  }
+
+  window.addContact11Image = addContact11Image;
+  window.removeContact11Image = removeContact11Image;
+
   function init() {
-    const form = document.querySelector('#wf-form-Contact-11-Form');
-    
+    var form = document.querySelector('#wf-form-Contact-11-Form');
     if (!form) {
       console.warn('⚠️ Contact form not found');
       return;
     }
 
-    // Set timestamp when form becomes available (anti-bot: time-based detection)
     var loadedAtField = form.querySelector('input[name="_form_loaded_at"]');
     if (loadedAtField) {
       loadedAtField.value = Date.now().toString();
     }
-    
-    // Remove any existing listeners by cloning
-    const newForm = form.cloneNode(true);
+
+    var newForm = form.cloneNode(true);
     form.parentNode.replaceChild(newForm, form);
-    
-    // Add our listener
+
+    updateContact11ImageDisplay();
+
     newForm.addEventListener('submit', async function(e) {
       e.preventDefault();
       e.stopPropagation();
-      
-      const submitBtn = newForm.querySelector('input[type="submit"]');
-      const originalValue = submitBtn ? submitBtn.value : '';
-      
-      // Disable button
+
+      var formParent = newForm.parentElement;
+      var successMessage = formParent ? formParent.querySelector('.w-form-done') : null;
+      var errorMessage = formParent ? formParent.querySelector('.w-form-fail') : null;
+
+      if (successMessage) {
+        successMessage.style.setProperty('display', 'none', 'important');
+        successMessage.style.visibility = 'hidden';
+      }
+      if (errorMessage) {
+        errorMessage.style.setProperty('display', 'none', 'important');
+        errorMessage.style.visibility = 'hidden';
+      }
+
+      var submitBtn = newForm.querySelector('input[type="submit"]');
+      var originalValue = submitBtn ? submitBtn.value : '';
+
       if (submitBtn) {
         submitBtn.disabled = true;
         submitBtn.value = 'Envoi...';
         submitBtn.style.opacity = '0.6';
       }
-      
+
       try {
-        // Get form data
-        const formData = new FormData(newForm);
-        
-        const name = formData.get('Contact-11-Name');
-        const email = formData.get('Contact-11-Email');
-        const message = formData.get('Contact-11-Message');
-        const honeypot = formData.get('website_url') || '';
-        const formLoadedAt = formData.get('_form_loaded_at') || '';
-        
-        // Send to Resend API
-        const response = await fetch('/api/submit-contact-form', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            name: name,
-            email: email,
-            message: message,
-            acceptTerms: 'true',
-            _hp: honeypot,
-            _t: formLoadedAt
-          })
-        });
-        
-        if (response.ok) {
-          // Success
-          if (submitBtn) {
-            submitBtn.value = '✓ Envoyé!';
-            submitBtn.style.background = '#28a745';
-            submitBtn.style.opacity = '1';
-          }
-          
-          // Hide form, show success message
-          setTimeout(() => {
-            newForm.style.display = 'none';
-            const successMsg = newForm.parentElement.querySelector('.w-form-done');
-            if (successMsg) {
-              successMsg.style.display = 'block';
-              successMsg.style.visibility = 'visible';
-              const successText = successMsg.querySelector('.success-text');
-              if (successText) {
-                successText.textContent = 'Merci ! Votre message a été envoyé avec succès.';
-              }
-            }
-          }, 1000);
-          
-        } else {
-          throw new Error('Erreur ' + response.status);
+        var termsCheckbox = newForm.querySelector('input[name="Contact-11-Checkbox"]');
+        if (!termsCheckbox || !termsCheckbox.checked) {
+          throw new Error('Vous devez accepter les conditions générales.');
         }
-        
+
+        var formData = new FormData(newForm);
+        formData.append('acceptTerms', 'true');
+
+        window.contact11PlanImages.forEach(function(file) {
+          formData.append(IMAGE_FIELD, file);
+        });
+
+        var response = await fetch('/api/submit-contact-form', {
+          method: 'POST',
+          body: formData
+        });
+
+        if (response.status === 413) {
+          throw new Error('Les images sont trop volumineuses. Veuillez réduire la taille des images ou en sélectionner moins. Maximum ~4,5 Mo au total.');
+        }
+
+        var responseText = await response.text();
+        var result = null;
+        if (responseText) {
+          try {
+            result = JSON.parse(responseText);
+          } catch (parseErr) {
+            if (!response.ok) {
+              throw new Error('Erreur serveur (' + response.status + ').');
+            }
+          }
+        }
+
+        if (!response.ok) {
+          var msg = (result && result.message) ? result.message : ('Erreur ' + response.status);
+          throw new Error(msg);
+        }
+
+        if (result && result.success === false) {
+          throw new Error(result.message || 'Envoi refusé.');
+        }
+
+        if (submitBtn) {
+          submitBtn.value = '✓ Envoyé!';
+          submitBtn.style.background = '#28a745';
+          submitBtn.style.opacity = '1';
+        }
+
+        window.contact11PlanImages = [];
+        updateContact11ImageDisplay();
+
+        setTimeout(function() {
+          newForm.style.display = 'none';
+          if (successMessage) {
+            successMessage.style.display = 'block';
+            successMessage.style.visibility = 'visible';
+            var successText = successMessage.querySelector('.success-text');
+            if (successText) {
+              successText.textContent = 'Merci ! Votre message a été envoyé avec succès.';
+            }
+          }
+        }, 800);
       } catch (error) {
         console.error('❌ Error:', error);
-        
-        // Show error message
-        const errorMsg = newForm.parentElement.querySelector('.w-form-fail');
-        if (errorMsg) {
-          errorMsg.style.display = 'block';
-          errorMsg.style.visibility = 'visible';
-          const errorText = errorMsg.querySelector('.error-text');
+
+        var raw = error && error.message ? error.message : 'Erreur lors de l\'envoi.';
+
+        if (errorMessage) {
+          errorMessage.style.display = 'block';
+          errorMessage.style.visibility = 'visible';
+          var errorText = errorMessage.querySelector('.error-text');
           if (errorText) {
-            errorText.textContent = 'Erreur lors de l\'envoi. Veuillez réessayer.';
+            errorText.textContent = raw;
           }
         }
-        
-        // Reset button
+
         if (submitBtn) {
           submitBtn.disabled = false;
           submitBtn.value = originalValue;
@@ -113,12 +227,10 @@
       }
     });
   }
-  
-  // Initialize when DOM is ready
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
   }
-  
 })();
