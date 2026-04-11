@@ -1,6 +1,14 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "functions": {
+    "api/submit-contact-form.js": {
+      "includeFiles": "api/email-logo-base64.txt"
+    },
+    "api/submit-career-form.js": {
+      "includeFiles": "api/email-logo-base64.txt"
+    }
+  },
   "headers": [
     {
       "source": "/(.*)",

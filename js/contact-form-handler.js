@@ -246,7 +246,12 @@
             result = JSON.parse(responseText);
           } catch (parseErr) {
             if (!response.ok) {
-              throw new Error('Erreur serveur (' + response.status + ').');
+              console.error('Réponse non-JSON du serveur:', responseText.slice(0, 800));
+              throw new Error(
+                'Erreur serveur (' +
+                  response.status +
+                  '). Réessayez plus tard ou appelez le 450-272-8140. Si le problème continue, la configuration courriel du site doit être vérifiée (Vercel / Resend).'
+              );
             }
           }
         }

@@ -1,6 +1,7 @@
 {
   "name": "construction-pmm",
   "version": "1.0.0",
+  "type": "module",
   "description": "Construction PMM website - Webflow export with career CV upload",
   "scripts": {
     "dev": "vercel dev",
